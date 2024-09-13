@@ -44,7 +44,8 @@ const post_signup = [
             password: hashedPassword
           }
         });
-        res.redirect("/login");
+        // res.redirect("/login");
+        res.json(user);
       }
     });
   })
