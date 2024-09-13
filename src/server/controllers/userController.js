@@ -23,6 +23,11 @@ cloudinary.config({
 const post_signup = [
   body("username", "Username is invalid").trim().isLength({ min: 3 }).toLowerCase().escape(),
   body("password", "Password is invalid").trim().isLength({ min: 3 }).escape(),
+  body("confirmPassword", "Confirm Password must match Password")
+    .trim()
+    .custom((value, { req }) => {
+      return value === req.body.password;
+    }),
   expressAsyncHandler(async (req, res, next) => {
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       if (err) {
