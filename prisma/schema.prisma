@@ -15,7 +15,8 @@ datasource db {
 
 model User {
   id       String @id @default(uuid())
-  username String @unique
+  // Var.Char(n) sets max length to n
+  username String @unique @db.VarChar(10)
   password String
 
   @@map("users")
