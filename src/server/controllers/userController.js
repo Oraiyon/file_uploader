@@ -5,7 +5,9 @@ import passport from "passport";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 // dest starts from root directory
 const upload = multer({ dest: "./src/server/public/uploads" });
 
@@ -18,9 +20,34 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const helloWorld = expressAsyncHandler((req, res, next) => {
-  console.log("HELLO WORLD");
-  res.json(true);
-});
+const post_signup = [
+  body("username", "Username is invalid").trim().isLength({ min: 3 }).toLowerCase().escape(),
+  body("password", "Password is invalid").trim().isLength({ min: 3 }).escape(),
+  expressAsyncHandler(async (req, res, next) => {
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      if (err) {
+        return next(err);
+      } else {
+        const errors = validationResult(req);
+        const usernameTaken = await prisma.user.findUnique({
+          where: {
+            username: req.body.username
+          }
+        });
+        if (!errors.isEmpty() || usernameTaken) {
+          res.redirect("/signup");
+          return;
+        }
+        const user = await prisma.user.create({
+          data: {
+            username: req.body.username,
+            password: hashedPassword
+          }
+        });
+        res.redirect("/login");
+      }
+    });
+  })
+];
 
-export default helloWorld;
+export default post_signup;

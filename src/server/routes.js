@@ -1,8 +1,8 @@
 import express from "express";
-import helloWorld from "./controllers/userController.js";
+import post_signup from "./controllers/userController.js";
 
 const router = express.Router();
 
-router.get("/helloWorld", helloWorld);
+router.post("/api/signup", post_signup);
 
 export default router;
