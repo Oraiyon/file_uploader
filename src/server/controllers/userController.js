@@ -90,7 +90,7 @@ export const logout = (req, res, next) => {
 
 export const getUser = expressAsyncHandler(async (req, res, next) => {
   if (!req.session.passport) {
-    res.status(200).json("/");
+    res.status(200).json({ redirect: "/" });
     return;
   }
   const user = await prisma.user.findUnique({

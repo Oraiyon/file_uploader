@@ -8,8 +8,8 @@ const User = () => {
       const getUser = async () => {
         const fetchUser = await fetch(`/api/get-user`);
         const data = await fetchUser.json();
-        if (data === "/") {
-          window.location.href = "/";
+        if (data.redirect) {
+          window.location.href = data.redirect;
           return;
         }
         setUser(data);
