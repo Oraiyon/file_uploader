@@ -75,8 +75,7 @@ export const login = [
   }),
   passport.authenticate("local"),
   (req, res, next) => {
-    // "3fd167c0-f39e-4f36-97a9-eaba7859d40d"
-    res.status(200).redirect(`/${req.user.id}`);
+    res.status(200).json(req.user);
   }
 ];
 
@@ -88,5 +87,18 @@ export const logout = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+export const getUser = expressAsyncHandler(async (req, res, next) => {
+  if (!req.session.passport) {
+    res.status(200).json("/");
+    return;
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      id: req.session.passport.user
+    }
+  });
+  res.status(200).json(user);
+});
 
 export default post_signup;

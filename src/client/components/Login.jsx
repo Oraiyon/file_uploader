@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const usernameRef = useRef(null);
@@ -19,7 +19,9 @@ const Login = () => {
         })
       });
       const data = await fetchData.json();
-      console.log(data);
+      if (data) {
+        window.location.href = `/${data.id}`;
+      }
     } catch (error) {
       console.log(error);
     }
