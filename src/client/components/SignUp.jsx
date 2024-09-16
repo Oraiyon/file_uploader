@@ -13,7 +13,7 @@ const SignUp = () => {
         <input type="password" name="confirmPassword" id="confirmPassword" />
         <button>Sign Up</button>
       </form>
-      <Link to={"/login"}>Login</Link>
+      <Link to={"/login"}>Log In</Link>
     </>
   );
 };
