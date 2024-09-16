@@ -40,20 +40,53 @@ const post_signup = [
           }
         });
         if (!errors.isEmpty() || usernameTaken) {
-          res.redirect("/signup");
+          res.status(200).redirect("/signup");
           return;
         }
-        const user = await prisma.user.create({
+        await prisma.user.create({
           data: {
             username: req.body.username,
             password: hashedPassword
           }
         });
-        // res.redirect("/login");
-        res.json(user);
+        res.status(200).redirect("/login");
       }
     });
   })
 ];
+
+export const login = [
+  expressAsyncHandler(async (req, res, next) => {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: req.body.username
+      }
+    });
+    if (!user) {
+      res.status(200).json(user);
+      return;
+    }
+    const match = await bcrypt.compare(req.body.password, user.password);
+    if (!match) {
+      res.status(200).json(user);
+      return;
+    }
+    next();
+  }),
+  passport.authenticate("local"),
+  (req, res, next) => {
+    // "3fd167c0-f39e-4f36-97a9-eaba7859d40d"
+    res.status(200).redirect(`/${req.user.id}`);
+  }
+];
+
+export const logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
 
 export default post_signup;
