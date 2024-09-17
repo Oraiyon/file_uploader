@@ -6,8 +6,8 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    try {
-      const getUser = async () => {
+    const getUser = async () => {
+      try {
         if (window.location.pathname !== "/") {
           const fetchUser = await fetch(`/api${window.location.pathname}`);
           const data = await fetchUser.json();
@@ -17,11 +17,11 @@ const App = () => {
           }
           setUser(data);
         }
-      };
-      getUser();
-    } catch (error) {
-      console.log(error);
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
   }, []);
 
   return (
