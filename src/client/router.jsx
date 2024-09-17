@@ -8,7 +8,13 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />
+      element: <App />,
+      children: [
+        {
+          path: "/:id",
+          element: <User />
+        }
+      ]
     },
     {
       path: "/signup",
@@ -17,10 +23,6 @@ const Router = () => {
     {
       path: "/login",
       element: <Login />
-    },
-    {
-      path: "/:id",
-      element: <User />
     }
   ]);
 
