@@ -6,10 +6,10 @@ const User = () => {
   useEffect(() => {
     try {
       const getUser = async () => {
-        const fetchUser = await fetch(`/api/get-user`);
+        const fetchUser = await fetch(`/api${window.location.pathname}`);
         const data = await fetchUser.json();
-        if (data.redirect) {
-          window.location.href = data.redirect;
+        if (!data) {
+          window.location.href = "/login";
           return;
         }
         setUser(data);
