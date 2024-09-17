@@ -8,7 +8,7 @@ const Login = () => {
   const submitLogin = async (e) => {
     try {
       e.preventDefault();
-      const fetchData = await fetch("/login", {
+      const fetchUser = await fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -18,9 +18,9 @@ const Login = () => {
           password: passwordRef.current.value
         })
       });
-      const data = await fetchData.json();
-      if (data) {
-        window.location.href = `/${data.id}`;
+      const user = await fetchUser.json();
+      if (user) {
+        window.location.href = `/${user.id}`;
       }
     } catch (error) {
       console.log(error);
