@@ -88,14 +88,10 @@ export const logout = (req, res, next) => {
   });
 };
 
-export const getUser = expressAsyncHandler(async (req, res, next) => {
-  if (!req.session.passport) {
-    res.status(200).json({ redirect: "/" });
-    return;
-  }
+export const get_user = expressAsyncHandler(async (req, res, next) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: req.session.passport.user
+      id: req.params.id
     }
   });
   res.status(200).json(user);
