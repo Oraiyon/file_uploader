@@ -36,6 +36,7 @@ const Login = () => {
         <input type="password" name="password" id="password" ref={passwordRef} />
         <button>Login</button>
       </form>
+      <Link to={"/"}>Home</Link>
       <Link to={"/signup"}>Sign Up</Link>
     </>
   );
