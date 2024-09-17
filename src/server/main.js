@@ -26,7 +26,7 @@ app.use(
     },
     store: new PrismaSessionStore(new PrismaClient(), {
       checkPeriod: 2 * 60 * 1000,
-      dbRecordIdFunction: true,
+      dbRecordIdIsSessionId: true,
       dbRecordIdFunction: undefined
     })
   })
