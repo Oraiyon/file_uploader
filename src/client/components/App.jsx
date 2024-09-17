@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 const App = () => {
   return (
     <>
-      <h1>HELLO WORLD</h1>
-      <Link to={"/signup"}>Sign Up</Link>
-      <Link to={"/login"}>Log In</Link>
+      <Header />
+      <h2>APP PAGE</h2>
     </>
   );
 };

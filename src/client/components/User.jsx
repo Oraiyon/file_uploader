@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "./Header";
 
 const User = () => {
   const [user, setUser] = useState(null);
@@ -22,8 +23,8 @@ const User = () => {
 
   return (
     <>
-      <h1>HELLO {user ? user.username : ""}</h1>
-      <a href="/logout">Log Out</a>
+      <Header user={user} />
+      <h2>USER PAGE</h2>
     </>
   );
 };
