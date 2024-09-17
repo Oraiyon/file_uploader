@@ -24,18 +24,10 @@ const App = () => {
     }
   }, []);
 
-  const DisplayPage = () => {
-    if (user) {
-      return <Outlet />;
-    } else {
-      return <h2>APP PAGE</h2>;
-    }
-  };
-
   return (
     <>
       <Header user={user} />
-      <DisplayPage />
+      <Outlet context={[user]} />
     </>
   );
 };
