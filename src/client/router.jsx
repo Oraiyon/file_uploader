@@ -17,16 +17,16 @@ const Router = () => {
         {
           path: "/:id",
           element: <User />
+        },
+        {
+          path: "/signup",
+          element: <SignUp />
+        },
+        {
+          path: "/login",
+          element: <Login />
         }
       ]
-    },
-    {
-      path: "/signup",
-      element: <SignUp />
-    },
-    {
-      path: "/login",
-      element: <Login />
     }
   ]);
 
