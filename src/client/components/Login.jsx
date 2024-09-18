@@ -1,9 +1,18 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 
 const Login = () => {
+  const [user, setUser] = useOutletContext();
+
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
+  const redirectRef = useRef(null);
+
+  useEffect(() => {
+    if (user) {
+      redirectRef.current.click();
+    }
+  }, [user]);
 
   const submitLogin = async (e) => {
     try {
@@ -18,9 +27,9 @@ const Login = () => {
           password: passwordRef.current.value
         })
       });
-      const user = await fetchUser.json();
-      if (user) {
-        window.location.href = `/${user.id}`;
+      const data = await fetchUser.json();
+      if (data) {
+        setUser(data);
       }
     } catch (error) {
       console.log(error);
@@ -38,6 +47,13 @@ const Login = () => {
       </form>
       <Link to={"/"}>Home</Link>
       <Link to={"/signup"}>Sign Up</Link>
+      {user ? (
+        <Link to={`/${user.id}`} ref={redirectRef} style={{ display: "none" }}>
+          TEST
+        </Link>
+      ) : (
+        ""
+      )}
     </>
   );
 };

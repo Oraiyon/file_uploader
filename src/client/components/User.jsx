@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 
 const User = () => {
-  const [user] = useOutletContext();
+  const [user, setUser] = useOutletContext();
 
   if (!user) {
     return <h2>APP PAGE</h2>;
