@@ -5,7 +5,9 @@ const Header = (props) => {
   return (
     <>
       <nav className={styles.header}>
-        <h1>Hello {props.user ? props.user.username : "World"}</h1>
+        <h1>
+          <Link>Hello {props.user ? props.user.username : "World"}</Link>
+        </h1>
         {props.user ? (
           <a href="/logout">Log Out</a>
         ) : (
