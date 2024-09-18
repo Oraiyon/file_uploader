@@ -18,7 +18,14 @@ const SignUp = () => {
       validateUsername();
       validatePassword();
       validateConfirmPassword();
-      if (!invalidUsername && !invalidPassword && !invalidConfirmPassword) {
+      if (
+        !invalidUsername &&
+        !invalidPassword &&
+        !invalidConfirmPassword &&
+        usernameRef.current.value &&
+        passwordRef.current.value &&
+        confirmPasswordRef.current.value
+      ) {
         const fetchSignUp = await fetch("/signup", {
           method: "POST",
           headers: {
@@ -66,14 +73,22 @@ const SignUp = () => {
 
   return (
     <>
-      <form action="" onSubmit={submitSignUp}>
+      <form action="" onSubmit={submitSignUp} className={styles.signUpForm}>
         <label htmlFor="username">Username:</label>
         <input type="text" name="username" id="username" ref={usernameRef} />
-        {invalidUsername ? <p>Username must be atleast 3 characters long.</p> : ""}
-        {usernameTaken ? <p>Username is already taken.</p> : ""}
+        {invalidUsername ? (
+          <p className={styles.invalidInput}>Username must be atleast 3 characters long.</p>
+        ) : (
+          ""
+        )}
+        {usernameTaken ? <p className={styles.invalidInput}>Username is already taken.</p> : ""}
         <label htmlFor="password">Password:</label>
         <input type="password" name="password" id="password" ref={passwordRef} />
-        {invalidPassword ? <p>Password must be atleast 6 characters long.</p> : ""}
+        {invalidPassword ? (
+          <p className={styles.invalidInput}>Password must be atleast 6 characters long.</p>
+        ) : (
+          ""
+        )}
         <label htmlFor="confirmPassword">Confirm Password:</label>
         <input
           type="password"
@@ -81,11 +96,16 @@ const SignUp = () => {
           id="confirmPassword"
           ref={confirmPasswordRef}
         />
-        {invalidConfirmPassword ? <p>Confirm Password must match Password.</p> : ""}
+        {invalidConfirmPassword ? (
+          <p className={styles.invalidInput}>Confirm Password must match Password.</p>
+        ) : (
+          ""
+        )}
         <button>Sign Up</button>
       </form>
-      <Link to={"/"}>Home</Link>
-      <Link to={"/login"}>Log In</Link>
+      <p>
+        Already have an account? <Link to={"/login"}>Log In!</Link>
+      </p>
     </>
   );
 };
