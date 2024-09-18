@@ -1,8 +1,11 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .header_links {
   display: flex;
+  align-items: center;
+  gap: 0.25em;
 }
