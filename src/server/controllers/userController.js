@@ -22,7 +22,7 @@ cloudinary.config({
 
 const post_signup = [
   body("username", "Username is invalid").trim().isLength({ min: 3 }).toLowerCase().escape(),
-  body("password", "Password is invalid").trim().isLength({ min: 3 }).escape(),
+  body("password", "Password is invalid").trim().isLength({ min: 6 }).escape(),
   body("confirmPassword", "Confirm Password must match Password")
     .trim()
     .custom((value, { req }) => {
@@ -40,7 +40,7 @@ const post_signup = [
           }
         });
         if (!errors.isEmpty() || usernameTaken) {
-          res.status(200).redirect("/signup");
+          res.status(200).json(false);
           return;
         }
         await prisma.user.create({
