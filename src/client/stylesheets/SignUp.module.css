@@ -1,6 +1,15 @@
 .signUpForm {
   display: flex;
+  width: 100%;
+  padding: 0 0.25em;
+}
+
+.signUpForm > div {
+  display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 0.25em;
 }
 
 .invalidInput {

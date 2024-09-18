@@ -70,21 +70,23 @@ const Login = () => {
 
   return (
     <>
-      <form action="" onSubmit={submitLogin} className={styles.signUpForm}>
-        <label htmlFor="username">Username:</label>
-        <input type="text" name="username" id="username" ref={usernameRef} />
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password" ref={passwordRef} />
-        {invalidUsername || invalidPassword ? (
-          <p className={styles.invalidInput}>Invalid Username or Password.</p>
-        ) : (
-          ""
-        )}
-        <button>Login</button>
+      <form action="" onSubmit={submitLogin} className={styles.loginForm}>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input type="text" name="username" id="username" ref={usernameRef} />
+          <label htmlFor="password">Password:</label>
+          <input type="password" name="password" id="password" ref={passwordRef} />
+          {invalidUsername || invalidPassword ? (
+            <p className={styles.invalidInput}>Invalid Username or Password.</p>
+          ) : (
+            ""
+          )}
+          <button>Login</button>
+          <p>
+            Don't have an account? <Link to={"/signup"}>Sign Up!</Link>
+          </p>
+        </div>
       </form>
-      <p>
-        Don't have an account? <Link to={"/signup"}>Sign Up!</Link>
-      </p>
       {user ? (
         <Link to={`/${user.id}`} ref={redirectRef} style={{ display: "none" }}>
           TEST

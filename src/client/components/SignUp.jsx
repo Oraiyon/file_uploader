@@ -74,38 +74,40 @@ const SignUp = () => {
   return (
     <>
       <form action="" onSubmit={submitSignUp} className={styles.signUpForm}>
-        <label htmlFor="username">Username:</label>
-        <input type="text" name="username" id="username" ref={usernameRef} />
-        {invalidUsername ? (
-          <p className={styles.invalidInput}>Username must be atleast 3 characters long.</p>
-        ) : (
-          ""
-        )}
-        {usernameTaken ? <p className={styles.invalidInput}>Username is already taken.</p> : ""}
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password" ref={passwordRef} />
-        {invalidPassword ? (
-          <p className={styles.invalidInput}>Password must be atleast 6 characters long.</p>
-        ) : (
-          ""
-        )}
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          ref={confirmPasswordRef}
-        />
-        {invalidConfirmPassword ? (
-          <p className={styles.invalidInput}>Confirm Password must match Password.</p>
-        ) : (
-          ""
-        )}
-        <button>Sign Up</button>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input type="text" name="username" id="username" ref={usernameRef} />
+          {invalidUsername ? (
+            <p className={styles.invalidInput}>Username must be atleast 3 characters long.</p>
+          ) : (
+            ""
+          )}
+          {usernameTaken ? <p className={styles.invalidInput}>Username is already taken.</p> : ""}
+          <label htmlFor="password">Password:</label>
+          <input type="password" name="password" id="password" ref={passwordRef} />
+          {invalidPassword ? (
+            <p className={styles.invalidInput}>Password must be atleast 6 characters long.</p>
+          ) : (
+            ""
+          )}
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            ref={confirmPasswordRef}
+          />
+          {invalidConfirmPassword ? (
+            <p className={styles.invalidInput}>Confirm Password must match Password.</p>
+          ) : (
+            ""
+          )}
+          <button>Sign Up</button>
+          <p>
+            Already have an account? <Link to={"/login"}>Log In!</Link>
+          </p>
+        </div>
       </form>
-      <p>
-        Already have an account? <Link to={"/login"}>Log In!</Link>
-      </p>
     </>
   );
 };
