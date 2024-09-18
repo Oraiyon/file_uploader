@@ -1,0 +1,8 @@
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.invalidInput {
+  color: red;
+}
