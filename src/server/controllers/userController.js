@@ -6,6 +6,7 @@ import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
+import { unlink } from "node:fs/promises";
 
 const prisma = new PrismaClient();
 // dest starts from root directory
@@ -95,6 +96,20 @@ export const get_user = expressAsyncHandler(async (req, res, next) => {
     }
   });
   res.status(200).json(user);
+});
+
+export const post_upload_file = [
+  upload.single("file"),
+  expressAsyncHandler(async (req, res, next) => {
+    // console.log(req.file.path);
+    await unlink(req.file.path);
+    res.json(true);
+  })
+];
+
+export const get_folders = expressAsyncHandler(async (req, res, next) => {
+  const folders = await prisma.folder.findMany();
+  res.status(200).json(folders);
 });
 
 export default post_signup;
