@@ -30,3 +30,21 @@ model Session {
 
   @@map("sessions")
 }
+
+model Folder {
+  id    String @id @default(uuid())
+  name  String
+  files File[]
+
+  @@map("folders")
+}
+
+model File {
+  id       String @id @default(uuid())
+  name     String
+  url      String
+  Folder   Folder @relation(fields: [folderId], references: [id])
+  folderId String
+
+  @@map("files")
+}
