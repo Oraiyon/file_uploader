@@ -1,38 +1,50 @@
 import { useRef } from "react";
 import styles from "../stylesheets/UploadFileForm.module.css";
+import { useOutletContext } from "react-router-dom";
 
 const UploadFileForm = () => {
-  const titleRef = useRef(null);
+  const [user, setUser] = useOutletContext();
+
+  const folderRef = useRef(null);
+  const nameRef = useRef(null);
   const fileRef = useRef(null);
 
   const uploadFile = async (e) => {
     try {
       e.preventDefault();
-      const fetchUpload = await fetch("/api/upload", {
+      const formData = new FormData();
+      formData.append("file", fileRef.current.files[0]);
+      const fetchFile = await fetch(`/api/${user.id}/upload`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          title: titleRef.current.value,
-          file: fileRef.current.value
-        })
+        body: formData
       });
     } catch (error) {
       console.log(error);
     }
   };
 
+  if (!user) {
+    window.location.href = "/";
+    return;
+  }
+
   return (
-    <>
-      <form action="" method="POST">
-        <label htmlFor="title">Title: </label>
-        <input type="text" name="title" id="title" ref={titleRef} />
-        <label htmlFor="file">File: </label>
-        <input type="file" name="file" id="file" ref={fileRef} />
-        <button>Submit</button>
+    <div className={styles.formContainer}>
+      <form action="" className={styles.uploadFileForm} onSubmit={uploadFile}>
+        <h2>Upload File</h2>
+        <div>
+          <label htmlFor="folder">Folder Name: </label>
+          <select ref={folderRef}>
+            <option value="">--Choose a folder--</option>
+          </select>
+          <label htmlFor="name">File Name: </label>
+          <input type="text" name="name" id="name" ref={nameRef} />
+          <label htmlFor="file">File: </label>
+          <input type="file" name="file" id="file" ref={fileRef} />
+          <button>Upload</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 
