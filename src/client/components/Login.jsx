@@ -87,13 +87,7 @@ const Login = () => {
           </p>
         </div>
       </form>
-      {user ? (
-        <Link to={`/${user.id}`} ref={redirectRef} style={{ display: "none" }}>
-          TEST
-        </Link>
-      ) : (
-        ""
-      )}
+      {user ? <Link to={`/${user.id}`} ref={redirectRef} style={{ display: "none" }}></Link> : ""}
     </>
   );
 };
