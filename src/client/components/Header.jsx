@@ -6,7 +6,9 @@ const Header = (props) => {
     <>
       <nav className={styles.header}>
         <h1>
-          <Link>Hello {props.user ? props.user.username : "World"}</Link>
+          <Link to={props.user ? `/${props.user.id}` : "/"}>
+            Hello {props.user ? props.user.username : "World"}
+          </Link>
         </h1>
         {props.user ? (
           <a href="/logout">Log Out</a>
