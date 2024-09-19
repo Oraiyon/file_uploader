@@ -3,6 +3,7 @@ import App from "./components/App";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import User from "./components/User";
+import UploadFileForm from "./components/UploadFileForm";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -15,16 +16,20 @@ const Router = () => {
           element: <User />
         },
         {
-          path: "/:id",
-          element: <User />
-        },
-        {
           path: "/signup",
           element: <SignUp />
         },
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/:id",
+          element: <User />
+        },
+        {
+          path: "/:id/upload",
+          element: <UploadFileForm />
         }
       ]
     }
