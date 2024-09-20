@@ -13,6 +13,8 @@ const UploadFileForm = () => {
     try {
       e.preventDefault();
       const formData = new FormData();
+      formData.append("folder", folderRef.current.value);
+      formData.append("name", nameRef.current.value);
       formData.append("file", fileRef.current.files[0]);
       const fetchFile = await fetch(`/api/${user.id}/upload`, {
         method: "POST",
@@ -30,17 +32,22 @@ const UploadFileForm = () => {
 
   return (
     <div className={styles.formContainer}>
-      <form action="" className={styles.uploadFileForm} onSubmit={uploadFile}>
+      <form
+        action=""
+        className={styles.uploadFileForm}
+        onSubmit={uploadFile}
+        encType="multipart/form-data"
+      >
         <h2>Upload File</h2>
         <div>
           <label htmlFor="folder">Create or Choose a Folder: </label>
-          <input type="text" name="folder" id="folder" list="folderList" />
-          <datalist id="folderList" ref={folderRef}>
+          <input type="text" name="folder" id="folder" list="folderList" ref={folderRef} />
+          <datalist id="folderList">
             {folderList.map((folder) => (
-              <div key={folder.id}>{folder.name}</div>
+              <option key={folder.id}>{folder.name}</option>
             ))}
           </datalist>
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="name">File Name: </label>
           <input type="text" name="name" id="name" ref={nameRef} />
           <label htmlFor="file">File: </label>
           <input type="file" name="file" id="file" ref={fileRef} />
