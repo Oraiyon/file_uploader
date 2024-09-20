@@ -3,7 +3,7 @@ import styles from "../stylesheets/UploadFileForm.module.css";
 import { useOutletContext } from "react-router-dom";
 
 const UploadFileForm = () => {
-  const [user, setUser] = useOutletContext();
+  const [user, setUser, folderList] = useOutletContext();
 
   const folderRef = useRef(null);
   const nameRef = useRef(null);
@@ -33,12 +33,14 @@ const UploadFileForm = () => {
       <form action="" className={styles.uploadFileForm} onSubmit={uploadFile}>
         <h2>Upload File</h2>
         <div>
-          <label htmlFor="folder">Folder Name: </label>
+          <label htmlFor="folder">Create or Choose a Folder: </label>
           <input type="text" name="folder" id="folder" list="folderList" />
           <datalist id="folderList" ref={folderRef}>
-            <option value="Hello"></option>
+            {folderList.map((folder) => (
+              <div key={folder.id}>{folder.name}</div>
+            ))}
           </datalist>
-          <label htmlFor="name">File Name: </label>
+          <label htmlFor="name">Name: </label>
           <input type="text" name="name" id="name" ref={nameRef} />
           <label htmlFor="file">File: </label>
           <input type="file" name="file" id="file" ref={fileRef} />

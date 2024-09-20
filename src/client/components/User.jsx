@@ -2,7 +2,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import Folders from "./Folders";
 
 const User = () => {
-  const [user, setUser] = useOutletContext();
+  const [user, setUser, folderList] = useOutletContext();
 
   if (!user) {
     return <h2>UNAUTHORIZED USER.</h2>;
@@ -10,7 +10,7 @@ const User = () => {
     return (
       <>
         <Link to={`/${user.id}/upload`}>Upload File</Link>
-        <Folders user={user} />
+        <Folders user={user} folderList={folderList} />
       </>
     );
   }
