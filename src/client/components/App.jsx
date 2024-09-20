@@ -19,7 +19,7 @@ const App = () => {
     if (user) {
       fetchFolders();
     }
-  }, []);
+  }, [user]);
 
   return (
     <>
