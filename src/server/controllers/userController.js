@@ -101,9 +101,39 @@ export const get_user = expressAsyncHandler(async (req, res, next) => {
 export const post_upload_file = [
   upload.single("file"),
   expressAsyncHandler(async (req, res, next) => {
-    // console.log(req.file.path);
+    const imageURL = await cloudinary.uploader.upload(req.file.path, {
+      folder: "file_uploader",
+      public_id: req.body.name
+    });
     await unlink(req.file.path);
-    res.json(true);
+    const file = await prisma.file.create({
+      data: {
+        name: req.body.name,
+        url: imageURL.secure_url,
+        Folder: {
+          connectOrCreate: {
+            where: {
+              name: req.body.folder
+            },
+            create: {
+              name: req.body.folder
+            }
+          }
+        },
+        User: {
+          connect: {
+            id: req.params.id
+          }
+        }
+      }
+    });
+    console.log(file);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.params.id
+      }
+    });
+    res.status(200).json(user);
   })
 ];
 

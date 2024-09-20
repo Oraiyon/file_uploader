@@ -18,6 +18,7 @@ model User {
   // Var.Char(n) sets max length to n
   username String @unique @db.VarChar(10)
   password String
+  File     File[]
 
   @@map("users")
 }
@@ -32,9 +33,9 @@ model Session {
 }
 
 model Folder {
-  id    String @id @default(uuid())
-  name  String
-  files File[]
+  id   String @id @default(uuid())
+  name String @unique
+  File File[]
 
   @@map("folders")
 }
@@ -45,6 +46,8 @@ model File {
   url      String
   Folder   Folder @relation(fields: [folderId], references: [id])
   folderId String
+  User     User   @relation(fields: [userId], references: [id])
+  userId   String
 
   @@map("files")
 }

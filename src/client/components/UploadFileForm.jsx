@@ -16,10 +16,12 @@ const UploadFileForm = () => {
       formData.append("folder", folderRef.current.value);
       formData.append("name", nameRef.current.value);
       formData.append("file", fileRef.current.files[0]);
-      const fetchFile = await fetch(`/api/${user.id}/upload`, {
+      const fetchResponse = await fetch(`/api/${user.id}/upload`, {
         method: "POST",
         body: formData
       });
+      const data = await fetchResponse.json();
+      setUser(data);
     } catch (error) {
       console.log(error);
     }
