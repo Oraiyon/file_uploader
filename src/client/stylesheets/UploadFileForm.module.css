@@ -1,0 +1,18 @@
+.formContainer {
+  display: flex;
+  gap: 0.25em;
+}
+
+.uploadFileForm {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 0.25em;
+}
+
+.uploadFileForm > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.25em;
+}

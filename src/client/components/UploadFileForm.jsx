@@ -34,9 +34,10 @@ const UploadFileForm = () => {
         <h2>Upload File</h2>
         <div>
           <label htmlFor="folder">Folder Name: </label>
-          <select ref={folderRef}>
-            <option value="">--Choose a folder--</option>
-          </select>
+          <input type="text" name="folder" id="folder" list="folderList" />
+          <datalist id="folderList" ref={folderRef}>
+            <option value="Hello"></option>
+          </datalist>
           <label htmlFor="name">File Name: </label>
           <input type="text" name="name" id="name" ref={nameRef} />
           <label htmlFor="file">File: </label>
