@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import User from "./components/User";
 import UploadFileForm from "./components/UploadFileForm";
 import Folder from "./components/Folder";
+import File from "./components/File";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const Router = () => {
         {
           path: "/:id/:folderId",
           element: <Folder />
+        },
+        {
+          path: "/:id/:folderId/:fileId",
+          element: <File />
         }
       ]
     }
