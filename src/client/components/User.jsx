@@ -1,5 +1,5 @@
 import { Link, useOutletContext } from "react-router-dom";
-import Folders from "./Folders";
+import FolderList from "./FolderList";
 
 const User = () => {
   const [user, setUser, folderList] = useOutletContext();
@@ -10,7 +10,7 @@ const User = () => {
     return (
       <>
         <Link to={`/${user.id}/upload`}>Upload File</Link>
-        <Folders user={user} folderList={folderList} />
+        <FolderList user={user} folderList={folderList} />
       </>
     );
   }

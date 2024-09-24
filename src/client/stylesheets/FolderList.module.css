@@ -1,0 +1,16 @@
+.folderContainer {
+  display: flex;
+  gap: 0.25em;
+}
+
+.folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.folder > svg {
+  width: 100px;
+  height: 100px;
+}
