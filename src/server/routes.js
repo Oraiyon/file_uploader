@@ -13,6 +13,6 @@ router.get("/api/:id", get_user);
 router.post("/api/:id/upload", post_upload_file);
 router.get("/api/:folderId/files", get_folder_files);
 
-router.get("/api/get/folders", get_folders);
+router.get("/api/:id/folders", get_folders);
 
 export default router;

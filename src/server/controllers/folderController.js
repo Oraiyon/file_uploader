@@ -4,7 +4,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const get_folders = expressAsyncHandler(async (req, res, next) => {
-  const folders = await prisma.folder.findMany();
+  const folders = await prisma.folder.findMany({
+    where: {
+      userId: req.params.id
+    }
+  });
   res.status(200).json(folders);
 });
 

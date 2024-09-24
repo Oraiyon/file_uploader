@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     const fetchFolders = async () => {
       try {
-        const foldersResponse = await fetch("/api/get/folders");
+        const foldersResponse = await fetch(`/api/${user.id}/folders`);
         const data = await foldersResponse.json();
         setFoldersList(data);
       } catch (error) {
