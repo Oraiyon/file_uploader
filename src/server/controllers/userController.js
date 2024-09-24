@@ -113,10 +113,12 @@ export const post_upload_file = [
         Folder: {
           connectOrCreate: {
             where: {
-              name: req.body.folder
+              name: req.body.folder,
+              userId: req.params.id
             },
             create: {
-              name: req.body.folder
+              name: req.body.folder,
+              userId: req.params.id
             }
           }
         },
@@ -127,7 +129,6 @@ export const post_upload_file = [
         }
       }
     });
-    console.log(file);
     const user = await prisma.user.findUnique({
       where: {
         id: req.params.id
