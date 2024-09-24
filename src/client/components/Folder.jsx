@@ -1,4 +1,8 @@
+import { useOutletContext } from "react-router-dom";
+
 const Folder = () => {
+  const [user, setUser, folderList] = useOutletContext();
+
   if (!user) {
     window.location.href = "/";
     return;

@@ -5,6 +5,7 @@ import Header from "./Header";
 const App = () => {
   const [user, setUser] = useState(null);
   const [folderList, setFoldersList] = useState([]);
+  const [folderId, setFolderId] = useState(null);
 
   useEffect(() => {
     const fetchFolders = async () => {
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <>
       <Header user={user} />
-      <Outlet context={[user, setUser, folderList]} />
+      <Outlet context={[user, setUser, folderList, folderId, setFolderId]} />
     </>
   );
 };
