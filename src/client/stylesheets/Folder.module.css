@@ -1,0 +1,14 @@
+.fileContainer {
+  display: flex;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file > svg {
+  width: 100px;
+  height: 100px;
+}

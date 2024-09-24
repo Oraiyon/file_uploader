@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
+import Icon from "@mdi/react";
+import { mdiFile } from "@mdi/js";
 
 const Folder = () => {
   const [user, setUser, folderList, folderId, setFolderId] = useOutletContext();
@@ -11,7 +13,6 @@ const Folder = () => {
     const fetchFolder = async () => {
       const response = await fetch(`/api/${folderId}/files`);
       const data = await response.json();
-      console.log(data);
       setFiles(data);
     };
     fetchFolder();
@@ -24,13 +25,16 @@ const Folder = () => {
 
   return (
     <>
-      {files
-        ? files.map((file) => (
-            <div key={file.id}>
-              <p>{file.name}</p>
-            </div>
-          ))
-        : ""}
+      <div className={styles.fileContainer}>
+        {files
+          ? files.map((file) => (
+              <div key={file.id} className={styles.file}>
+                <Icon path={mdiFile}></Icon>
+                <p>{file.name}</p>
+              </div>
+            ))
+          : ""}
+      </div>
     </>
   );
 };
