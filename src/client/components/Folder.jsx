@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
 import Icon from "@mdi/react";
 import { mdiFile } from "@mdi/js";
@@ -28,10 +28,12 @@ const Folder = () => {
       <div className={styles.fileContainer}>
         {files
           ? files.map((file) => (
-              <div key={file.id} className={styles.file}>
-                <Icon path={mdiFile}></Icon>
-                <p>{file.name}</p>
-              </div>
+              <Link to={`/${user.id}/${folderId}/${file.id}`} key={file.id}>
+                <div className={styles.file}>
+                  <Icon path={mdiFile}></Icon>
+                  <p>{file.name}</p>
+                </div>
+              </Link>
             ))
           : ""}
       </div>
