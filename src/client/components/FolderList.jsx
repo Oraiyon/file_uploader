@@ -11,7 +11,7 @@ const Folders = (props) => {
       <>
         <div className={styles.folderContainer}>
           {props.folderList.map((folder) => (
-            <Link to={`/${props.user}/${folder.id}`} key={folder.id}>
+            <Link to={`/${props.user.id}/${folder.id}`} key={folder.id}>
               <div className={styles.folder} onClick={() => props.setFolderId(folder.id)}>
                 <Icon path={mdiFolder}></Icon>
                 <p>{folder.name}</p>
