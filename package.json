@@ -11,6 +11,8 @@
     "format": "prettier --write './**/*.{js, jsx, css, md, json}' --config ./.prettierrc"
   },
   "dependencies": {
+    "@mdi/js": "^7.4.47",
+    "@mdi/react": "^1.6.1",
     "@prisma/client": "^5.19.1",
     "@quixo3/prisma-session-store": "^3.1.13",
     "bcryptjs": "^2.4.3",
