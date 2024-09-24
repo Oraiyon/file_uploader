@@ -6,14 +6,15 @@ const Header = (props) => {
     <>
       <nav className={styles.header}>
         <h1>
-          <Link to={props.user ? `/${props.user.id}` : "/"}>
-            Hello {props.user ? props.user.username : "World"}
-          </Link>
+          <Link to={props.user ? `/${props.user.id}` : "/"}>Home</Link>
         </h1>
         {props.user ? (
-          <a href="/logout">Log Out</a>
+          <div className={styles.right_header_links}>
+            <Link to={`/${props.user.id}/upload`}>Upload File</Link>
+            <a href="/logout">Log Out</a>
+          </div>
         ) : (
-          <div className={styles.header_links}>
+          <div className={styles.right_header_links}>
             <Link to={"/signup"}>Sign Up</Link>
             <Link to={"/login"}>Log In</Link>
           </div>

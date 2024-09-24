@@ -4,7 +4,10 @@
   align-items: center;
 }
 
-.header_links {
+.left_header_links {
+}
+
+.right_header_links {
   display: flex;
   align-items: center;
   gap: 0.25em;

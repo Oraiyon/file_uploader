@@ -9,7 +9,6 @@ const User = () => {
   } else {
     return (
       <>
-        <Link to={`/${user.id}/upload`}>Upload File</Link>
         <FolderList
           user={user}
           folderList={folderList}
