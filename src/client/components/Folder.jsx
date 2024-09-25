@@ -36,7 +36,7 @@ const Folder = () => {
 
   return (
     <>
-      <Navbar type={2} user={user} selectedFolder={selectedFolder} />
+      <Navbar level={2} user={user} selectedFolder={selectedFolder} />
       <div className={styles.fileContainer}>
         {files
           ? files.map((file) => (

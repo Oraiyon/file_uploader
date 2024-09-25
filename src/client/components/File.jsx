@@ -34,7 +34,7 @@ const File = () => {
 
   return (
     <>
-      <Navbar type={3} user={user} selectedFolder={selectedFolder} selectedFile={selectedFile} />
+      <Navbar level={3} user={user} selectedFolder={selectedFolder} selectedFile={selectedFile} />
       <div className={styles.fileContainer}>
         <h3>{file ? file.name : ""}</h3>
       </div>

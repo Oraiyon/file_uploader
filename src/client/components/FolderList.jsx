@@ -10,7 +10,7 @@ const Folders = (props) => {
   } else {
     return (
       <>
-        <Navbar type={1} user={props.user} />
+        <Navbar level={1} user={props.user} />
         <div className={styles.folderContainer}>
           {props.folderList.map((folder) => (
             <Link to={`/${props.user.id}/${folder.id}`} key={folder.id}>
