@@ -1,9 +1,12 @@
 .navContainer {
   display: flex;
-  gap: 0.25em;
 }
 
 .navContainer > a {
   border: 1px solid black;
   padding: 0.25em;
+}
+
+.navContainer > a:not(:first-of-type) {
+  border-left: 0;
 }
