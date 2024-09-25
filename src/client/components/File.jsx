@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import styles from "../stylesheets/File.module.css";
+import Navbar from "./Navbar";
 
 const File = () => {
-  const [user, setUser, folderList, folderId, setFolderId, fileId, setFileId] = useOutletContext();
+  const [
+    user,
+    setUser,
+    folderList,
+    selectedFolder,
+    setSelectedFolder,
+    selectedFile,
+    setSelectedFile
+  ] = useOutletContext();
 
   const [file, setFile] = useState(null);
 
-  // Create bar that displays previous tabs
-  // Folders > files > file
   useEffect(() => {
     const fetchFile = async () => {
-      const response = await fetch(`/api/${fileId}/file`);
+      const response = await fetch(`/api/${selectedFile.id}/file`);
       const data = await response.json();
       setFile(data);
     };
@@ -26,7 +34,10 @@ const File = () => {
 
   return (
     <>
-      <h3>{file ? file.name : ""}</h3>
+      <Navbar type={3} user={user} selectedFolder={selectedFolder} selectedFile={selectedFile} />
+      <div className={styles.fileContainer}>
+        <h3>{file ? file.name : ""}</h3>
+      </div>
     </>
   );
 };
