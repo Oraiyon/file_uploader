@@ -5,7 +5,7 @@ import Icon from "@mdi/react";
 import { mdiFile } from "@mdi/js";
 
 const Folder = () => {
-  const [user, setUser, folderList, folderId, setFolderId] = useOutletContext();
+  const [user, setUser, folderList, folderId, setFolderId, fileId, setFileId] = useOutletContext();
 
   const [files, setFiles] = useState(null);
 
@@ -29,7 +29,7 @@ const Folder = () => {
         {files
           ? files.map((file) => (
               <Link to={`/${user.id}/${folderId}/${file.id}`} key={file.id}>
-                <div className={styles.file}>
+                <div className={styles.file} onClick={() => setFileId(file.id)}>
                   <Icon path={mdiFile}></Icon>
                   <p>{file.name}</p>
                 </div>

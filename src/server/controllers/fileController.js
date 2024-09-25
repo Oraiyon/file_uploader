@@ -68,4 +68,13 @@ export const get_folder_files = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(files);
 });
 
+export const get_file = expressAsyncHandler(async (req, res, next) => {
+  const file = await prisma.file.findFirst({
+    where: {
+      id: req.params.fileId
+    }
+  });
+  res.status(200).json(file);
+});
+
 export default post_upload_file;
