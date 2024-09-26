@@ -4,7 +4,7 @@ import Header from "./Header";
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [folderList, setFoldersList] = useState([]);
+  const [folderList, setFolderList] = useState([]);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -13,7 +13,7 @@ const App = () => {
       try {
         const foldersResponse = await fetch(`/api/${user.id}/folders`);
         const data = await foldersResponse.json();
-        setFoldersList(data);
+        setFolderList(data);
       } catch (error) {
         console.log(error);
       }
@@ -31,6 +31,7 @@ const App = () => {
           user,
           setUser,
           folderList,
+          setFolderList,
           selectedFolder,
           setSelectedFolder,
           selectedFile,

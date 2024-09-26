@@ -10,6 +10,7 @@ const Folder = () => {
     user,
     setUser,
     folderList,
+    setFolderList,
     selectedFolder,
     setSelectedFolder,
     selectedFile,
@@ -19,13 +20,13 @@ const Folder = () => {
   const [files, setFiles] = useState(null);
 
   useEffect(() => {
-    const fetchFolder = async () => {
+    const fetchFiles = async () => {
       const response = await fetch(`/api/${selectedFolder.id}/files`);
       const data = await response.json();
       setFiles(data);
     };
     if (user) {
-      fetchFolder();
+      fetchFiles();
     }
   }, [selectedFolder]);
 
@@ -34,10 +35,12 @@ const Folder = () => {
     return;
   }
 
-  const deleteFile = async () => {
-    const response = await fetch(`/api/:id/delete/${selectedFile.id}`, {
+  const deleteFile = async (file) => {
+    const response = await fetch(`/api/${user.id}/${selectedFolder.id}/delete/${file.id}`, {
       method: "DELETE"
     });
+    const data = await response.json();
+    setFiles(data);
   };
 
   return (
@@ -55,7 +58,7 @@ const Folder = () => {
                 <p>{file.name}</p>
                 <div className={styles.file_buttons}>
                   <button>Download</button>
-                  <button onClick={deleteFile}>Delete</button>
+                  <button onClick={() => deleteFile(file)}>Delete</button>
                 </div>
               </div>
             ))

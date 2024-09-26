@@ -6,6 +6,7 @@ const User = () => {
     user,
     setUser,
     folderList,
+    setFolderList,
     selectedFolder,
     setSelectedFolder,
     selectedFile,

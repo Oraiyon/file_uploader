@@ -4,6 +4,7 @@ import multer from "multer";
 import { unlink } from "node:fs/promises";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
+import get_folders from "./folderController.js";
 
 const prisma = new PrismaClient();
 
@@ -76,27 +77,29 @@ export const get_file = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(file);
 });
 
+//
 export const delete_file = expressAsyncHandler(async (req, res, next) => {
   await prisma.file.delete({
     where: {
       id: req.params.fileId
     }
   });
-  const folder = await prisma.folder.findFirst({
+  const files = await prisma.file.findMany({
     where: {
-      id: req.params.folderId
+      folderId: req.params.folderId
     }
   });
-  if (folder.length) {
-    res.status(200).json(folder);
-  } else {
-    await prisma.folder.delete({
-      where: {
-        id: req.params.folderId
-      }
-    });
-    res.status(200).json(false);
+  if (files.length) {
+    res.status(200).json(files);
   }
+  // else {
+  //   await prisma.folder.delete({
+  //     where: {
+  //       id: req.params.folderId
+  //     }
+  //   });
+  //   get_folders();
+  // }
 });
 
 export default post_upload_file;

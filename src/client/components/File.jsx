@@ -8,6 +8,7 @@ const File = () => {
     user,
     setUser,
     folderList,
+    setFolderList,
     selectedFolder,
     setSelectedFolder,
     selectedFile,
@@ -25,7 +26,7 @@ const File = () => {
     if (user) {
       fetchFile();
     }
-  }, []);
+  }, [selectedFile]);
 
   if (!user) {
     window.location.href = "/";
