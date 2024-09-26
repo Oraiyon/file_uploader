@@ -35,7 +35,7 @@ model Session {
 
 model Folder {
   id     String  @id @default(uuid())
-  name   String
+  name   String  @unique
   File   File[]
   User   User?   @relation(fields: [userId], references: [id])
   userId String?

@@ -34,8 +34,7 @@ const post_upload_file = [
         Folder: {
           connectOrCreate: {
             where: {
-              name: req.body.folder,
-              userId: req.params.id
+              name: req.body.folder
             },
             create: {
               name: req.body.folder,
@@ -75,6 +74,29 @@ export const get_file = expressAsyncHandler(async (req, res, next) => {
     }
   });
   res.status(200).json(file);
+});
+
+export const delete_file = expressAsyncHandler(async (req, res, next) => {
+  await prisma.file.delete({
+    where: {
+      id: req.params.fileId
+    }
+  });
+  const folder = await prisma.folder.findFirst({
+    where: {
+      id: req.params.folderId
+    }
+  });
+  if (folder.length) {
+    res.status(200).json(folder);
+  } else {
+    await prisma.folder.delete({
+      where: {
+        id: req.params.folderId
+      }
+    });
+    res.status(200).json(false);
+  }
 });
 
 export default post_upload_file;
