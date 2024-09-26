@@ -47,22 +47,24 @@ const Folder = () => {
     <>
       <Navbar level={2} user={user} selectedFolder={selectedFolder} />
       <div className={styles.fileContainer}>
-        {files
-          ? files.map((file) => (
-              <div className={styles.fileCard} key={file.id}>
-                <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
-                  <div className={styles.file} onClick={() => setSelectedFile(file)}>
-                    <Icon path={mdiFile}></Icon>
-                  </div>
-                </Link>
-                <p>{file.name}</p>
-                <div className={styles.file_buttons}>
-                  <button>Download</button>
-                  <button onClick={() => deleteFile(file)}>Delete</button>
+        {files && files.length ? (
+          files.map((file) => (
+            <div className={styles.fileCard} key={file.id}>
+              <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
+                <div className={styles.file} onClick={() => setSelectedFile(file)}>
+                  <Icon path={mdiFile}></Icon>
                 </div>
+              </Link>
+              <p>{file.name}</p>
+              <div className={styles.file_buttons}>
+                <button>Download</button>
+                <button onClick={() => deleteFile(file)}>Delete</button>
               </div>
-            ))
-          : ""}
+            </div>
+          ))
+        ) : (
+          <p>NO FILES.</p>
+        )}
       </div>
     </>
   );
