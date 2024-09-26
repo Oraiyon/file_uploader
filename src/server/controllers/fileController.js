@@ -89,17 +89,7 @@ export const delete_file = expressAsyncHandler(async (req, res, next) => {
       folderId: req.params.folderId
     }
   });
-  if (files.length) {
-    res.status(200).json(files);
-  }
-  // else {
-  //   await prisma.folder.delete({
-  //     where: {
-  //       id: req.params.folderId
-  //     }
-  //   });
-  //   get_folders();
-  // }
+  res.status(200).json(files);
 });
 
 export default post_upload_file;
