@@ -34,18 +34,30 @@ const Folder = () => {
     return;
   }
 
+  const deleteFile = async () => {
+    const response = await fetch(`/api/:id/delete/${selectedFile.id}`, {
+      method: "DELETE"
+    });
+  };
+
   return (
     <>
       <Navbar level={2} user={user} selectedFolder={selectedFolder} />
       <div className={styles.fileContainer}>
         {files
           ? files.map((file) => (
-              <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`} key={file.id}>
-                <div className={styles.file} onClick={() => setSelectedFile(file)}>
-                  <Icon path={mdiFile}></Icon>
-                  <p>{file.name}</p>
+              <div className={styles.fileCard} key={file.id}>
+                <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
+                  <div className={styles.file} onClick={() => setSelectedFile(file)}>
+                    <Icon path={mdiFile}></Icon>
+                  </div>
+                </Link>
+                <p>{file.name}</p>
+                <div className={styles.file_buttons}>
+                  <button>Download</button>
+                  <button onClick={deleteFile}>Delete</button>
                 </div>
-              </Link>
+              </div>
             ))
           : ""}
       </div>

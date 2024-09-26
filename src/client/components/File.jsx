@@ -32,12 +32,21 @@ const File = () => {
     return;
   }
 
+  const DisplayFile = () => {
+    if (file) {
+      return (
+        <div className={styles.fileContainer}>
+          <h3>{file.name}</h3>
+          <img src={file.url} alt={file.name} />
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <Navbar level={3} user={user} selectedFolder={selectedFolder} selectedFile={selectedFile} />
-      <div className={styles.fileContainer}>
-        <h3>{file ? file.name : ""}</h3>
-      </div>
+      <DisplayFile />
     </>
   );
 };
