@@ -10,6 +10,7 @@ const UploadFileForm = () => {
   const folderRef = useRef(null);
   const nameRef = useRef(null);
   const fileRef = useRef(null);
+  const previewRef = useRef(null);
 
   const uploadFile = async (e) => {
     try {
@@ -42,11 +43,26 @@ const UploadFileForm = () => {
   const DisplayUploading = () => {
     if (uploading) {
       return (
-        <>
+        <div className={styles.uploading}>
           <h3>UPLOADING FILE...</h3>
-        </>
+        </div>
       );
     }
+  };
+
+  const showPreview = (e) => {
+    const output = previewRef.current;
+    if (!e.target.files[0]) {
+      output.src = "";
+    } else {
+      if (e.target.files[0].type === "image/jpeg") {
+        if (fileRef.current.value !== "") {
+          output.src = URL.createObjectURL(e.target.files[0]);
+        }
+      }
+    }
+    // Avoids memory leaks
+    output.onload = () => URL.revokeObjectURL(output.src);
   };
 
   return (
@@ -69,11 +85,12 @@ const UploadFileForm = () => {
           <label htmlFor="name">File Name: </label>
           <input type="text" name="name" id="name" ref={nameRef} />
           <label htmlFor="file">File: </label>
-          <input type="file" name="file" id="file" ref={fileRef} />
+          <input type="file" name="file" id="file" ref={fileRef} onChange={showPreview} />
           <button>Upload</button>
         </div>
+        <DisplayUploading />
       </form>
-      <DisplayUploading />
+      <img src="" alt="" ref={previewRef} />
     </div>
   );
 };
