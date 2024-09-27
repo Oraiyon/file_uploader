@@ -6,8 +6,7 @@
 .signUpForm > div {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
+  width: 50%;
   gap: 0.25em;
 }
 

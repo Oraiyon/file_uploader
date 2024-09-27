@@ -4,13 +4,13 @@
 }
 
 .formContainer > img {
-  width: 50%;
+  width: 49%;
 }
 
 .uploadFileForm {
   display: flex;
   flex-direction: column;
-  width: 49%;
+  width: 50%;
   gap: 0.25em;
 }
 
