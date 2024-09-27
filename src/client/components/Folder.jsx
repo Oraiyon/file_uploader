@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
 import Icon from "@mdi/react";
@@ -18,6 +18,8 @@ const Folder = () => {
   ] = useOutletContext();
 
   const [files, setFiles] = useState(null);
+
+  const downloadLink = useRef(null);
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -43,6 +45,14 @@ const Folder = () => {
     setFiles(data);
   };
 
+  const downloadFile = (file) => {
+    const start = file.url.substr(0, 50);
+    const end = file.url.slice(49);
+    const url = start + `fl_attachment:${file.name}` + end;
+    downloadLink.current.href = url;
+    downloadLink.current.click();
+  };
+
   return (
     <>
       <Navbar level={2} user={user} selectedFolder={selectedFolder} />
@@ -57,9 +67,10 @@ const Folder = () => {
               </Link>
               <p>{file.name}</p>
               <div className={styles.file_buttons}>
-                <button>Download</button>
+                <button onClick={() => downloadFile(file)}>Download</button>
                 <button onClick={() => deleteFile(file)}>Delete</button>
               </div>
+              <a ref={downloadLink} href=""></a>
             </div>
           ))
         ) : (
