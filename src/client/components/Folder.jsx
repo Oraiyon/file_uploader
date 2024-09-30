@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
-import Icon from "@mdi/react";
-import { mdiFile } from "@mdi/js";
 import Navbar from "./Navbar";
+import Icon from "@mdi/react";
+import { mdiDownloadBox } from "@mdi/js";
 
 const Folder = () => {
   const [
@@ -60,12 +60,12 @@ const Folder = () => {
         {files && files.length ? (
           files.map((file) => (
             <div className={styles.fileCard} key={file.id}>
+              <p>{file.name}</p>
               <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
                 <div className={styles.file} onClick={() => setSelectedFile(file)}>
-                  <Icon path={mdiFile}></Icon>
+                  <img src={file.url}></img>
                 </div>
               </Link>
-              <p>{file.name}</p>
               <div className={styles.file_buttons}>
                 <button onClick={() => downloadFile(file)}>Download</button>
                 <button onClick={() => deleteFile(file)}>Delete</button>
