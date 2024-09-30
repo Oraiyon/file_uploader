@@ -31,6 +31,7 @@ const UploadFileForm = () => {
       folderRef.current.value = "";
       nameRef.current.value = "";
       fileRef.current.value = "";
+      previewRef.current.src = "";
       setUploading(false);
     } catch (error) {
       console.log(error);
