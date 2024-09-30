@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
 import Navbar from "./Navbar";
-import Icon from "@mdi/react";
-import { mdiDownloadBox, mdiTrashCan } from "@mdi/js";
+import FileButtons from "./FileButtons";
 
 const Folder = () => {
   const [
@@ -14,12 +13,10 @@ const Folder = () => {
     selectedFolder,
     setSelectedFolder,
     selectedFile,
-    setSelectedFile
+    setSelectedFile,
+    files,
+    setFiles
   ] = useOutletContext();
-
-  const [files, setFiles] = useState(null);
-
-  const downloadLink = useRef(null);
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -37,30 +34,6 @@ const Folder = () => {
     return;
   }
 
-  const deleteFile = async (file) => {
-    const response = await fetch(`/api/${user.id}/${selectedFolder.id}/delete/${file.id}`, {
-      method: "DELETE"
-    });
-    const data = await response.json();
-    setFiles(data);
-  };
-
-  const downloadFile = (file) => {
-    const start = file.url.substr(0, 50);
-    const end = file.url.slice(49);
-    const url = start + `fl_attachment:${file.name}` + end;
-    downloadLink.current.href = url;
-    downloadLink.current.click();
-  };
-
-  const DisplayFileSize = (props) => {
-    if (props.file.size / 1000000 < 1024) {
-      return <p>{(props.file.size / 1000000).toFixed(2)} MB</p>;
-    } else {
-      return <p>{(props.file.size / 1000000000).toFixed(2)} GB</p>;
-    }
-  };
-
   return (
     <>
       <Navbar level={2} user={user} selectedFolder={selectedFolder} />
@@ -76,16 +49,12 @@ const Folder = () => {
                   <img src={file.url}></img>
                 </div>
               </Link>
-              <div className={styles.file_buttons}>
-                <Icon
-                  path={mdiDownloadBox}
-                  title="Download"
-                  onClick={() => downloadFile(file)}
-                ></Icon>
-                <DisplayFileSize file={file} />
-                <Icon path={mdiTrashCan} title="Delete" onClick={() => deleteFile(file)}></Icon>
-              </div>
-              <a ref={downloadLink} href=""></a>
+              <FileButtons
+                file={file}
+                user={user}
+                selectedFolder={selectedFolder}
+                setFiles={setFiles}
+              />
             </div>
           ))
         ) : (

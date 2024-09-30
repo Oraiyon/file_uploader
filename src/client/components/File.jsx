@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/File.module.css";
 import Navbar from "./Navbar";
+import FileButtons from "./FileButtons";
 
 const File = () => {
   const [
@@ -12,7 +13,9 @@ const File = () => {
     selectedFolder,
     setSelectedFolder,
     selectedFile,
-    setSelectedFile
+    setSelectedFile,
+    files,
+    setFiles
   ] = useOutletContext();
 
   const [file, setFile] = useState(null);
@@ -37,8 +40,16 @@ const File = () => {
     if (file) {
       return (
         <div className={styles.fileContainer}>
-          <h3>{file.name}</h3>
+          <h3>
+            {file.name}.{file.format}
+          </h3>
           <img src={file.url} alt={file.name} />
+          <FileButtons
+            file={file}
+            user={user}
+            selectedFolder={selectedFolder}
+            setFiles={setFiles}
+          />
         </div>
       );
     }

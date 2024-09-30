@@ -1,0 +1,18 @@
+.file_buttons {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.file_buttons > svg {
+  cursor: pointer;
+  width: 30px;
+}
+
+.file_buttons > svg:first-of-type:hover {
+  color: green;
+}
+.file_buttons > svg:last-of-type:hover {
+  color: red;
+}

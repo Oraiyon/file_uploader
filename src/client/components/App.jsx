@@ -7,6 +7,7 @@ const App = () => {
   const [folderList, setFolderList] = useState([]);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [files, setFiles] = useState(null);
 
   useEffect(() => {
     const fetchFolders = async () => {
@@ -35,7 +36,9 @@ const App = () => {
           selectedFolder,
           setSelectedFolder,
           selectedFile,
-          setSelectedFile
+          setSelectedFile,
+          files,
+          setFiles
         ]}
       />
     </>
