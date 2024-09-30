@@ -3,7 +3,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
 import Navbar from "./Navbar";
 import Icon from "@mdi/react";
-import { mdiDownloadBox } from "@mdi/js";
+import { mdiDownloadBox, mdiTrashCan } from "@mdi/js";
 
 const Folder = () => {
   const [
@@ -67,8 +67,12 @@ const Folder = () => {
                 </div>
               </Link>
               <div className={styles.file_buttons}>
-                <button onClick={() => downloadFile(file)}>Download</button>
-                <button onClick={() => deleteFile(file)}>Delete</button>
+                <Icon path={mdiDownloadBox} title="Download">
+                  <button onClick={() => downloadFile(file)}></button>
+                </Icon>
+                <Icon path={mdiTrashCan} title="Delete">
+                  <button onClick={() => deleteFile(file)}>Delete</button>
+                </Icon>
               </div>
               <a ref={downloadLink} href=""></a>
             </div>
