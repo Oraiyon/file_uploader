@@ -76,6 +76,7 @@ const SignUp = () => {
   return (
     <>
       <form action="" onSubmit={submitSignUp} className={styles.signUpForm}>
+        <h2>Sign Up</h2>
         <div>
           <label htmlFor="username">Username:</label>
           <input type="text" name="username" id="username" ref={usernameRef} />

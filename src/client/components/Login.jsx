@@ -71,6 +71,7 @@ const Login = () => {
   return (
     <>
       <form action="" onSubmit={submitLogin} className={styles.loginForm}>
+        <h2>Login</h2>
         <div>
           <label htmlFor="username">Username:</label>
           <input type="text" name="username" id="username" ref={usernameRef} />

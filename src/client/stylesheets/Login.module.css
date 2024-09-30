@@ -1,5 +1,6 @@
 .loginForm {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -8,6 +9,10 @@
   flex-direction: column;
   width: 50%;
   gap: 0.25em;
+}
+
+.loginForm > div > p > a {
+  text-decoration: underline;
 }
 
 .invalidInput {
