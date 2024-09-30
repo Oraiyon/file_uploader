@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import styles from "../stylesheets/UploadFileForm.module.css";
 import { useOutletContext } from "react-router-dom";
+import Icon from "@mdi/react";
+import { mdiLoading } from "@mdi/js";
 
 const UploadFileForm = () => {
   const [user, setUser, folderList] = useOutletContext();
@@ -44,7 +46,7 @@ const UploadFileForm = () => {
     if (uploading) {
       return (
         <div className={styles.uploading}>
-          <h3>UPLOADING FILE...</h3>
+          <Icon path={mdiLoading}></Icon>
         </div>
       );
     }
@@ -53,10 +55,12 @@ const UploadFileForm = () => {
   const showPreview = (e) => {
     const output = previewRef.current;
     if (!e.target.files[0]) {
+      previewRef.current.style.display = "none";
       output.src = "";
     } else {
       if (e.target.files[0].type === "image/jpeg") {
         if (fileRef.current.value !== "") {
+          previewRef.current.style.display = "flex";
           output.src = URL.createObjectURL(e.target.files[0]);
         }
       }
@@ -90,7 +94,7 @@ const UploadFileForm = () => {
         </div>
         <DisplayUploading />
       </form>
-      <img src="" alt="" ref={previewRef} />
+      <img src="" alt="" ref={previewRef} style={{ display: "none" }} />
     </div>
   );
 };

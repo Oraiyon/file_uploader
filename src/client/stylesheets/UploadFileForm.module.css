@@ -5,6 +5,7 @@
 
 .formContainer > img {
   width: 49%;
+  height: fit-content;
 }
 
 .uploadFileForm {
@@ -19,4 +20,16 @@
   flex-direction: column;
   width: 100%;
   gap: 0.25em;
+}
+
+.uploading {
+  width: 10%;
+  height: 10%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
