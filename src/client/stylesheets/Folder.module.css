@@ -11,6 +11,11 @@
   border: 1px solid black;
 }
 
+.fileCard:hover {
+  background-color: black;
+  color: white;
+}
+
 .file {
   display: flex;
   flex-direction: column;

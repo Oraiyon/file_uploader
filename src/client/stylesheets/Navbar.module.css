@@ -11,3 +11,8 @@
 .navContainer > a:not(:first-of-type) {
   border-left: 0;
 }
+
+.navContainer > a:hover {
+  background-color: black;
+  color: white;
+}
