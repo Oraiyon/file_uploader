@@ -67,12 +67,12 @@ const Folder = () => {
                 </div>
               </Link>
               <div className={styles.file_buttons}>
-                <Icon path={mdiDownloadBox} title="Download">
-                  <button onClick={() => downloadFile(file)}></button>
-                </Icon>
-                <Icon path={mdiTrashCan} title="Delete">
-                  <button onClick={() => deleteFile(file)}>Delete</button>
-                </Icon>
+                <Icon
+                  path={mdiDownloadBox}
+                  title="Download"
+                  onClick={() => downloadFile(file)}
+                ></Icon>
+                <Icon path={mdiTrashCan} title="Delete" onClick={() => deleteFile(file)}></Icon>
               </div>
               <a ref={downloadLink} href=""></a>
             </div>
