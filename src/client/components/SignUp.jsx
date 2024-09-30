@@ -40,6 +40,8 @@ const SignUp = () => {
         const data = await fetchSignUp.json();
         if (!data) {
           setUsernameTaken(true);
+        } else {
+          window.location.href = "/login";
         }
       }
     } catch (error) {

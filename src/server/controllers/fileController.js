@@ -4,7 +4,6 @@ import multer from "multer";
 import { unlink } from "node:fs/promises";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-import get_folders from "./folderController.js";
 
 const prisma = new PrismaClient();
 
@@ -27,6 +26,7 @@ const post_upload_file = [
       folder: "file_uploader",
       public_id: req.body.name
     });
+    console.log(imageURL);
     await unlink(req.file.path);
     const file = await prisma.file.create({
       data: {
@@ -47,7 +47,9 @@ const post_upload_file = [
           connect: {
             id: req.params.id
           }
-        }
+        },
+        size: imageURL.bytes,
+        format: imageURL.format
       }
     });
     const user = await prisma.user.findFirst({
@@ -77,13 +79,13 @@ export const get_file = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(file);
 });
 
-//
 export const delete_file = expressAsyncHandler(async (req, res, next) => {
-  await prisma.file.delete({
+  const file = await prisma.file.delete({
     where: {
       id: req.params.fileId
     }
   });
+  // await cloudinary.uploader.destroy(`file_uploader/${file.name}`);
   const files = await prisma.file.findMany({
     where: {
       folderId: req.params.folderId
