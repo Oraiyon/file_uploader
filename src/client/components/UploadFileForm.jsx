@@ -45,11 +45,7 @@ const UploadFileForm = () => {
 
   const DisplayUploading = () => {
     if (uploading) {
-      return (
-        <div className={styles.uploading}>
-          <Icon path={mdiLoading}></Icon>
-        </div>
-      );
+      return <Icon path={mdiLoading}></Icon>;
     }
   };
 
