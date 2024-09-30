@@ -53,6 +53,14 @@ const Folder = () => {
     downloadLink.current.click();
   };
 
+  const DisplayFileSize = (props) => {
+    if (props.file.size / 1000000 < 1024) {
+      return <p>{(props.file.size / 1000000).toFixed(2)} MB</p>;
+    } else {
+      return <p>{(props.file.size / 1000000000).toFixed(2)} GB</p>;
+    }
+  };
+
   return (
     <>
       <Navbar level={2} user={user} selectedFolder={selectedFolder} />
@@ -60,7 +68,9 @@ const Folder = () => {
         {files && files.length ? (
           files.map((file) => (
             <div className={styles.fileCard} key={file.id}>
-              <p>{file.name}</p>
+              <p>
+                {file.name}.{file.format}
+              </p>
               <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
                 <div className={styles.file} onClick={() => setSelectedFile(file)}>
                   <img src={file.url}></img>
@@ -72,6 +82,7 @@ const Folder = () => {
                   title="Download"
                   onClick={() => downloadFile(file)}
                 ></Icon>
+                <DisplayFileSize file={file} />
                 <Icon path={mdiTrashCan} title="Delete" onClick={() => deleteFile(file)}></Icon>
               </div>
               <a ref={downloadLink} href=""></a>
