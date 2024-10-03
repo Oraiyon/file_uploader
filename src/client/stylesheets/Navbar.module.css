@@ -4,15 +4,11 @@
 }
 
 .navContainer > a {
-  border: 1px solid black;
+  border-top: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
   padding: 0.25em;
 }
 
-.navContainer > a:not(:first-of-type) {
-  border-left: 0;
-}
-
 .navContainer > a:hover {
-  background-color: black;
-  color: white;
+  border-color: black;
 }

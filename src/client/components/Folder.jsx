@@ -41,10 +41,10 @@ const Folder = () => {
         {files && files.length ? (
           files.map((file) => (
             <div className={styles.fileCard} key={file.id}>
-              <p>
-                {file.name}.{file.format}
-              </p>
               <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
+                <p>
+                  {file.name}.{file.format}
+                </p>
                 <div className={styles.file} onClick={() => setSelectedFile(file)}>
                   <img src={file.url}></img>
                 </div>
