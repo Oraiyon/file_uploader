@@ -89,9 +89,11 @@ const UploadFileForm = () => {
           <input type="file" name="file" id="file" ref={fileRef} onChange={showPreview} />
           <button>Upload</button>
         </div>
-        <DisplayUploading />
       </form>
-      <img src="" alt="" ref={previewRef} style={{ display: "none" }} />
+      <div className={styles.filePreview}>
+        <img src="" alt="" ref={previewRef} style={{ display: "none" }} />
+        <DisplayUploading />
+      </div>
     </div>
   );
 };
