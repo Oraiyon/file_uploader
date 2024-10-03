@@ -23,8 +23,7 @@ const post_upload_file = [
   upload.single("file"),
   expressAsyncHandler(async (req, res, next) => {
     const imageURL = await cloudinary.uploader.upload(req.file.path, {
-      folder: "file_uploader",
-      public_id: req.body.name
+      folder: "file_uploader"
     });
     console.log(imageURL);
     await unlink(req.file.path);
@@ -49,7 +48,8 @@ const post_upload_file = [
           }
         },
         size: imageURL.bytes,
-        format: imageURL.format
+        format: imageURL.format,
+        publicId: imageURL.public_id.slice(14)
       }
     });
     const user = await prisma.user.findFirst({
@@ -85,7 +85,7 @@ export const delete_file = expressAsyncHandler(async (req, res, next) => {
       id: req.params.fileId
     }
   });
-  // await cloudinary.uploader.destroy(`file_uploader/${file.name}`);
+  await cloudinary.uploader.destroy(`file_uploader/${file.publicId}`);
   const files = await prisma.file.findMany({
     where: {
       folderId: req.params.folderId

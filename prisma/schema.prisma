@@ -51,9 +51,10 @@ model File {
   folderId  String
   User      User     @relation(fields: [userId], references: [id])
   userId    String
-  size      Int?
-  format    String?
+  size      Int
+  format    String
   createdAt DateTime @default(now())
+  publicId  String
 
   @@map("files")
 }

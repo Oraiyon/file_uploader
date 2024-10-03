@@ -6,7 +6,7 @@ import { mdiDownloadBox, mdiTrashCan } from "@mdi/js";
 const FileButtons = (props) => {
   const downloadLink = useRef(null);
 
-  const deleteFile = async (file) => {
+  const deleteFile = async () => {
     const response = await fetch(
       `/api/${props.user.id}/${props.selectedFolder.id}/delete/${props.file.id}`,
       {
@@ -14,30 +14,31 @@ const FileButtons = (props) => {
       }
     );
     const data = await response.json();
-    setFiles(data);
+    props.setFiles(data);
   };
 
-  const downloadFile = (file) => {
-    const start = file.url.substr(0, 50);
-    const end = file.url.slice(49);
-    const url = start + `fl_attachment:${file.name}` + end;
+  const downloadFile = () => {
+    const start = props.file.url.substr(0, 50);
+    const end = props.file.url.slice(49);
+    const url = start + `fl_attachment:${props.file.name}` + end;
     downloadLink.current.href = url;
     downloadLink.current.click();
   };
 
   const DisplayFileSize = (props) => {
-    if (props.file.size / 1000000 < 1024) {
-      return <p>{(props.file.size / 1000000).toFixed(2)} MB</p>;
+    // Using base 2 conversion
+    if (props.file.size / 1048576 < 1024) {
+      return <p>{(props.file.size / 1048576).toFixed(2)} MB</p>;
     } else {
-      return <p>{(props.file.size / 1000000000).toFixed(2)} GB</p>;
+      return <p>{(props.file.size / 1073741824).toFixed(2)} GB</p>;
     }
   };
 
   return (
     <div className={styles.file_buttons}>
-      <Icon path={mdiDownloadBox} title="Download" onClick={() => downloadFile(props.file)}></Icon>
+      <Icon path={mdiDownloadBox} title="Download" onClick={downloadFile}></Icon>
       <DisplayFileSize file={props.file} />
-      <Icon path={mdiTrashCan} title="Delete" onClick={() => deleteFile(props.file)}></Icon>
+      <Icon path={mdiTrashCan} title="Delete" onClick={deleteFile}></Icon>
       <a ref={downloadLink} href=""></a>
     </div>
   );
