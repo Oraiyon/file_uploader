@@ -25,7 +25,6 @@ const post_upload_file = [
     const imageURL = await cloudinary.uploader.upload(req.file.path, {
       folder: "file_uploader"
     });
-    console.log(imageURL);
     await unlink(req.file.path);
     const file = await prisma.file.create({
       data: {
