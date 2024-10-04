@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.25em;
   border: 2px solid var(--secondary-color);
   border-radius: 0.25em;
 }
@@ -17,8 +16,46 @@
   border-color: black;
 }
 
+.fileCard > a {
+  margin: 0.25em;
+}
+
 .fileCard > a > p {
   text-align: center;
+}
+
+.fileCardHeaders {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fileCardHeaders > button {
+  padding: 0.25em;
+  border: none;
+  border-bottom: 2px solid var(--secondary-color);
+  cursor: pointer;
+}
+
+.fileCardHeaders > button:first-child {
+  border-right: 2px solid var(--secondary-color);
+}
+
+.fileCardHeaders > button:last-child {
+  border-left: 2px solid var(--secondary-color);
+}
+
+.fileCardHeaders > button:first-child:hover {
+  background-color: green;
+}
+
+.fileCardHeaders > button:last-child:hover {
+  background-color: red;
+}
+
+.fileCardHeaders > button:hover {
+  border-color: black;
 }
 
 .file {
