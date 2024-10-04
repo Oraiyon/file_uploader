@@ -21,6 +21,7 @@ const User = () => {
         <FolderList
           user={user}
           folderList={folderList}
+          setFolderList={setFolderList}
           selectedFolder={selectedFolder}
           setSelectedFolder={setSelectedFolder}
         />

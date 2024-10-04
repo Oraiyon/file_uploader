@@ -2,17 +2,40 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.25em;
+  position: relative;
+  height: 100%;
+}
+
+.folderCard {
+  border: 2px solid var(--secondary-color);
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.folderCard > button {
+  width: fit-content;
+  align-self: flex-end;
+  cursor: pointer;
+  border: none;
+  padding: 0.25em;
+  border-left: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.folderCard > button:hover {
+  background-color: red;
+  border-color: black;
 }
 
 .folder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid var(--secondary-color);
-  border-radius: 0.25em;
 }
 
-.folder > svg {
+.folderIcon {
   width: 100%;
   height: 100%;
   max-width: 100px;
@@ -20,12 +43,61 @@
   color: rgb(235, 216, 192);
 }
 
-.folder:hover {
+.folderCard:hover {
   border-color: black;
 }
 
-.folder:hover > svg {
+.folderCard > a:hover .folderIcon {
   fill: none;
   stroke: black;
   stroke-width: 0.5px;
+}
+
+.folderModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+  border-radius: 0.25em;
+  padding-bottom: 0.25em;
+  width: 75%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-color);
+}
+
+.folderModal > button {
+  padding: 0.25em;
+  cursor: pointer;
+}
+
+.folderModal > button:first-of-type {
+  font-size: x-large;
+  align-self: flex-end;
+  border: none;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.invalidFolderCard {
+  border: 2px solid var(--secondary-color);
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.invalidFolderCard > button {
+  width: fit-content;
+  align-self: flex-end;
+  cursor: pointer;
+  border: none;
+  padding: 0.25em;
+  border-left: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  cursor: default;
 }
