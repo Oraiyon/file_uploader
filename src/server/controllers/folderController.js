@@ -47,7 +47,7 @@ export const delete_folder = expressAsyncHandler(async (req, res, next) => {
 });
 
 export const delete_folder_files = expressAsyncHandler(async (req, res, next) => {
-  const files = await prisma.file.deleteMany({
+  const files = await prisma.file.findMany({
     where: {
       folderId: req.params.folderId
     }
@@ -55,6 +55,11 @@ export const delete_folder_files = expressAsyncHandler(async (req, res, next) =>
   for (let i = 0; i < files.length; i++) {
     await cloudinary.uploader.destroy(`file_uploader/${files[i].publicId}`);
   }
+  const deletedFiles = await prisma.file.deleteMany({
+    where: {
+      folderId: req.params.folderId
+    }
+  });
   const deletedFolder = await prisma.folder.delete({
     where: {
       id: req.params.folderId
