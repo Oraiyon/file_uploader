@@ -26,11 +26,11 @@ const FileButtons = (props) => {
   };
 
   const DisplayFileSize = (props) => {
-    // Using base 2 conversion
-    if (props.file.size / 1048576 < 1024) {
-      return <p>{(props.file.size / 1048576).toFixed(2)} MB</p>;
+    // Using base 10 conversion
+    if (props.file.size / 1000000 < 1024) {
+      return <p>{(props.file.size / 1000000).toFixed(2)} MB</p>;
     } else {
-      return <p>{(props.file.size / 1073741824).toFixed(2)} GB</p>;
+      return <p>{(props.file.size / 1000000000).toFixed(2)} GB</p>;
     }
   };
 
