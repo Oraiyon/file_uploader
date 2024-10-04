@@ -21,7 +21,7 @@ const Folders = (props) => {
       if (data.filesLength) {
         setDisplayFolderModal(true);
         setDeleteMessage(
-          `${folder.name} has ${data.filesLength} ${data.filesLength === 1 ? "file" : "files"} inside.`
+          `${folder.name} has ${data.filesLength} ${data.filesLength === 1 ? "file" : "files"} inside. Are you sure you want to delete ${folder.name}?`
         );
         setFolderToBeDeleted(folder);
       } else {

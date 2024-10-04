@@ -75,6 +75,10 @@
   cursor: pointer;
 }
 
+.folderModal > button:hover {
+  background-color: red;
+}
+
 .folderModal > button:first-of-type {
   font-size: x-large;
   align-self: flex-end;
