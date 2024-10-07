@@ -21,7 +21,7 @@ const Navbar = (props) => {
         <Link to={`/${props.user.id}`}>Folder List</Link>
         <Link to={`/${props.user.id}/${props.selectedFolder.id}`}>{props.selectedFolder.name}</Link>
         <Link to={`/${props.user.id}/${props.selectedFolder.id}/${props.selectedFile.id}`}>
-          {props.selectedFile.name}
+          {props.selectedFile.name}.{props.selectedFile.format}
         </Link>
       </nav>
     );
