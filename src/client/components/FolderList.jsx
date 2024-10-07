@@ -26,6 +26,7 @@ const Folders = (props) => {
         setFolderToBeDeleted(folder);
       } else {
         props.setFolderList(data);
+        setDisplayFolderModal(false);
       }
     } catch (error) {
       console.log(error);
@@ -44,6 +45,7 @@ const Folders = (props) => {
       });
       const data = await response.json();
       props.setFolderList(data);
+      setDisplayFolderModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +73,9 @@ const Folders = (props) => {
               </div>
             ) : (
               <div key={folder.id} className={styles.invalidFolderCard}>
-                <button>X</button>
+                <button>
+                  <Icon path={mdiClose}></Icon>
+                </button>
                 <div className={styles.folder}>
                   <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
                   <p>{folder.name}</p>
