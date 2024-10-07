@@ -9,3 +9,9 @@
   align-items: center;
   gap: 0.25em;
 }
+
+.right_header_links > button {
+  padding: 0.25em;
+  display: flex;
+  align-items: center;
+}

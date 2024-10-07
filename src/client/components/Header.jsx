@@ -10,8 +10,12 @@ const Header = (props) => {
         </h1>
         {props.user ? (
           <div className={styles.right_header_links}>
-            <Link to={`/${props.user.id}/upload`}>Upload File</Link>
-            <a href="/logout">Log Out</a>
+            <button>
+              <Link to={`/${props.user.id}/upload`}>Upload File</Link>
+            </button>
+            <button>
+              <a href="/logout">Log Out</a>
+            </button>
           </div>
         ) : (
           <div className={styles.right_header_links}>
