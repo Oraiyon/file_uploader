@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useRef } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/File.module.css";
 import Navbar from "./Navbar";
 import DisplayFileSize from "./DisplayFileSize";
@@ -20,20 +20,8 @@ const File = () => {
     setFiles
   ] = useOutletContext();
 
-  const [file, setFile] = useState(null);
-
-  const downloadLink = useRef(null);
-
-  useEffect(() => {
-    const fetchFile = async () => {
-      const response = await fetch(`/api/${selectedFile.id}/file`);
-      const data = await response.json();
-      setFile(data);
-    };
-    if (user) {
-      fetchFile();
-    }
-  }, [selectedFile]);
+  const downloadLinkRef = useRef(null);
+  const redirectLinkRef = useRef(null);
 
   if (!user) {
     window.location.href = "/";
@@ -41,50 +29,44 @@ const File = () => {
   }
 
   const downloadFile = () => {
-    const start = file.url.substr(0, 50);
-    const end = file.url.slice(49);
-    const url = start + `fl_attachment:${file.name}` + end;
-    downloadLink.current.href = url;
-    downloadLink.current.click();
+    const start = selectedFile.url.substr(0, 50);
+    const end = selectedFile.url.slice(49);
+    const url = selectedFile + `fl_attachment:${selectedFile.name}` + end;
+    downloadLinkRef.current.href = url;
+    downloadLinkRef.current.click();
   };
 
   const deleteFile = async () => {
-    const response = await fetch(`/api/${props.user.id}/${selectedFolder.id}/delete/${file.id}`, {
+    const response = await fetch(`/api/${user.id}/${selectedFolder.id}/delete/${selectedFile.id}`, {
       method: "DELETE"
     });
     const data = await response.json();
     setFiles(data);
-  };
-
-  const DisplayFile = () => {
-    if (file) {
-      return (
-        <div className={styles.fileContainer}>
-          <div>
-            <div className={styles.file_buttons}>
-              <button>
-                <Icon path={mdiDownload} title="Download" onClick={downloadFile}></Icon>
-              </button>
-              <h3>
-                {file.name}.{file.format}
-              </h3>
-              <button>
-                <Icon path={mdiClose} title="Delete" onClick={deleteFile}></Icon>
-              </button>
-              <a ref={downloadLink} href=""></a>
-            </div>
-            <img src={file.url} alt={file.name} />
-            <DisplayFileSize file={file} />
-          </div>
-        </div>
-      );
-    }
+    redirectLinkRef.current.click();
   };
 
   return (
     <>
       <Navbar level={3} user={user} selectedFolder={selectedFolder} selectedFile={selectedFile} />
-      <DisplayFile />
+      <div className={styles.fileContainer}>
+        <div>
+          <div className={styles.file_buttons}>
+            <button>
+              <Icon path={mdiDownload} title="Download" onClick={downloadFile}></Icon>
+            </button>
+            <h3>
+              {selectedFile.name}.{selectedFile.format}
+            </h3>
+            <button>
+              <Icon path={mdiClose} title="Delete" onClick={deleteFile}></Icon>
+            </button>
+            <a ref={downloadLinkRef} href=""></a>
+            <Link to={`/${user.id}/${selectedFolder.id}`} ref={redirectLinkRef}></Link>
+          </div>
+          <img src={selectedFile.url} alt={selectedFile.name} />
+          <DisplayFileSize file={selectedFile} />
+        </div>
+      </div>
     </>
   );
 };
