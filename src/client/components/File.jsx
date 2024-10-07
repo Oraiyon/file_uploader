@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/File.module.css";
 import Navbar from "./Navbar";
-import FileButtons from "./FileButtons";
 import DisplayFileSize from "./DisplayFileSize";
+import Icon from "@mdi/react";
+import { mdiDownload, mdiClose } from "@mdi/js";
 
 const File = () => {
   const [
@@ -21,6 +22,8 @@ const File = () => {
 
   const [file, setFile] = useState(null);
 
+  const downloadLink = useRef(null);
+
   useEffect(() => {
     const fetchFile = async () => {
       const response = await fetch(`/api/${selectedFile.id}/file`);
@@ -37,17 +40,39 @@ const File = () => {
     return;
   }
 
+  const downloadFile = () => {
+    const start = file.url.substr(0, 50);
+    const end = file.url.slice(49);
+    const url = start + `fl_attachment:${file.name}` + end;
+    downloadLink.current.href = url;
+    downloadLink.current.click();
+  };
+
+  const deleteFile = async () => {
+    const response = await fetch(`/api/${props.user.id}/${selectedFolder.id}/delete/${file.id}`, {
+      method: "DELETE"
+    });
+    const data = await response.json();
+    setFiles(data);
+  };
+
   const DisplayFile = () => {
     if (file) {
       return (
         <div className={styles.fileContainer}>
           <div>
-            <FileButtons
-              file={file}
-              user={user}
-              selectedFolder={selectedFolder}
-              setFiles={setFiles}
-            />
+            <div className={styles.file_buttons}>
+              <button>
+                <Icon path={mdiDownload} title="Download" onClick={downloadFile}></Icon>
+              </button>
+              <h3>
+                {file.name}.{file.format}
+              </h3>
+              <button>
+                <Icon path={mdiClose} title="Delete" onClick={deleteFile}></Icon>
+              </button>
+              <a ref={downloadLink} href=""></a>
+            </div>
             <img src={file.url} alt={file.name} />
             <DisplayFileSize file={file} />
           </div>
