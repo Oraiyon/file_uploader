@@ -14,4 +14,10 @@
   padding: 0.25em;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  border: 2px solid var(--secondary-color);
+}
+
+.right_header_links > button:hover {
+  border: 2px solid black;
 }

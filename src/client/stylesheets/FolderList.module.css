@@ -129,4 +129,5 @@
 
 .invalidFolderCard > .folderButtons > button {
   cursor: default;
+  pointer-events: none;
 }
