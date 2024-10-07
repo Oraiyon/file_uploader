@@ -1,11 +1,19 @@
 .fileContainer {
   display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.fileContainer > div {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25em;
-  padding-top: 0.25em;
+  max-width: 1000px;
+  max-height: 1000px;
 }
 
-.fileContainer > img {
-  max-height: 400px;
+.fileContainer > div > img {
+  width: 100%;
+  height: 100%;
 }

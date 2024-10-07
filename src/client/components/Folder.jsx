@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Folder.module.css";
 import Navbar from "./Navbar";
+import Icon from "@mdi/react";
+import { mdiDownload, mdiClose } from "@mdi/js";
+import DisplayFileSize from "./DisplayFileSize";
 
 const Folder = () => {
   const [
@@ -57,17 +60,22 @@ const Folder = () => {
           files.map((file) => (
             <div className={styles.fileCard} key={file.id}>
               <div className={styles.fileCardHeaders}>
-                <button onClick={() => downloadFile(file)}>D</button>
+                <button onClick={() => downloadFile(file)}>
+                  <Icon path={mdiDownload} title="Download"></Icon>
+                </button>
                 <p>
                   {file.name}.{file.format}
                 </p>
-                <button onClick={() => deleteFile(file)}>X</button>
+                <button onClick={() => deleteFile(file)}>
+                  <Icon path={mdiClose} title="Delete"></Icon>
+                </button>
               </div>
               <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
                 <div className={styles.file} onClick={() => setSelectedFile(file)}>
                   <img src={file.url}></img>
                 </div>
               </Link>
+              <DisplayFileSize file={file} />
             </div>
           ))
         ) : (

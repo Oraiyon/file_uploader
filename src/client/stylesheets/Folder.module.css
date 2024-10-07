@@ -36,6 +36,12 @@
   border: none;
   border-bottom: 2px solid var(--secondary-color);
   cursor: pointer;
+  width: 100%;
+  max-width: 25px;
+}
+
+.fileCardHeaders > button > svg {
+  display: flex;
 }
 
 .fileCardHeaders > button:first-child {
@@ -72,6 +78,6 @@
   border: 2px solid var(--secondary-color);
 }
 
-.fileCard:hover .file > img {
+.file > img:hover {
   border-color: black;
 }

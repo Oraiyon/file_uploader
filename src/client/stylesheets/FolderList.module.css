@@ -22,11 +22,17 @@
   padding: 0.25em;
   border-left: 2px solid var(--secondary-color);
   border-bottom: 2px solid var(--secondary-color);
+  display: flex;
 }
 
 .folderCard > button:hover {
   background-color: red;
   border-color: black;
+}
+
+.folderCard > button > svg {
+  width: 100%;
+  max-width: 25px;
 }
 
 .folder {
