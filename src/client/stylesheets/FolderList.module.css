@@ -14,29 +14,36 @@
   height: fit-content;
 }
 
-.folderCard > button {
-  width: fit-content;
-  align-self: flex-end;
-  cursor: pointer;
-  border: none;
-  padding: 0.25em;
-  border-left: 2px solid var(--secondary-color);
-  border-bottom: 2px solid var(--secondary-color);
+.folderButtons {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 0.25em;
 }
 
-.folderCard > button:hover {
-  background-color: red;
+.folderButtons > button {
+  max-width: 25px;
+  cursor: pointer;
+  border: 2px solid var(--secondary-color);
+}
+
+.folderButtons > button:first-of-type {
+  border-left: none;
+  border-top: none;
+}
+
+.folderButtons > button:last-of-type {
+  border-right: none;
+  border-top: none;
+}
+
+.folderCard > .folderButtons > button:hover {
   border-color: black;
 }
 
-.folderCard > button,
-.invalidFolderCard > button {
-  max-width: 25px;
-}
-
-.folderCard > button > svg,
-.invalidFolderCard > button > svg {
+.folderButtons > button > svg {
+  display: flex;
   width: 100%;
 }
 
@@ -82,29 +89,24 @@
 }
 
 .folderModal > button {
-  padding: 0.25em;
   cursor: pointer;
-}
-
-.folderModal > button:hover {
-  background-color: red;
+  border: 2px solid black;
 }
 
 .folderModal > button:first-of-type {
   align-self: flex-end;
-  border: none;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
-  max-width: 25px;
   display: flex;
-}
-
-.folderModal > button:first-of-type > svg {
-  width: 100%;
+  max-width: 25px;
+  border-top: none;
+  border-right: none;
 }
 
 .folderModal > button:last-of-type {
-  border: 2px solid black;
+  padding: 0.25em;
+}
+
+.folderModal > button > svg {
+  width: 100%;
 }
 
 .invalidFolderCard {
@@ -123,4 +125,8 @@
   border-left: 2px solid var(--secondary-color);
   border-bottom: 2px solid var(--secondary-color);
   display: flex;
+}
+
+.invalidFolderCard > .folderButtons > button {
+  cursor: default;
 }

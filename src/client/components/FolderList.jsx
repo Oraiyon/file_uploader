@@ -1,6 +1,6 @@
 import styles from "../stylesheets/FolderList.module.css";
 import Icon from "@mdi/react";
-import { mdiFolder, mdiClose } from "@mdi/js";
+import { mdiFolder, mdiClose, mdiShareVariant } from "@mdi/js";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useRef, useState } from "react";
@@ -61,24 +61,34 @@ const Folders = (props) => {
           {props.folderList.map((folder) =>
             !deleteMessage ? (
               <div key={folder.id} className={styles.folderCard}>
-                <button onClick={() => deleteFolder(folder)}>
-                  <Icon path={mdiClose} title={"Delete"}></Icon>
-                </button>
+                <div className={styles.folderButtons}>
+                  <button>
+                    <Icon path={mdiShareVariant}></Icon>
+                  </button>
+                  <p>{folder.name}</p>
+                  <button onClick={() => deleteFolder(folder)}>
+                    <Icon path={mdiClose} title={"Delete"}></Icon>
+                  </button>
+                </div>
                 <Link to={`/${props.user.id}/${folder.id}`}>
                   <div className={styles.folder} onClick={() => props.setSelectedFolder(folder)}>
                     <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
-                    <p>{folder.name}</p>
                   </div>
                 </Link>
               </div>
             ) : (
               <div key={folder.id} className={styles.invalidFolderCard}>
-                <button>
-                  <Icon path={mdiClose}></Icon>
-                </button>
+                <div className={styles.folderButtons}>
+                  <button>
+                    <Icon path={mdiShareVariant}></Icon>
+                  </button>
+                  <p>{folder.name}</p>
+                  <button>
+                    <Icon path={mdiClose}></Icon>
+                  </button>
+                </div>
                 <div className={styles.folder}>
                   <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
-                  <p>{folder.name}</p>
                 </div>
               </div>
             )
@@ -86,7 +96,7 @@ const Folders = (props) => {
           {displayFolderModal ? (
             <div className={styles.folderModal} ref={folderModalRef}>
               <button onClick={closeModal}>
-                <Icon path={mdiClose} title={"Delete"}></Icon>
+                <Icon path={mdiClose}></Icon>
               </button>
               <p>{deleteMessage}</p>
               <button onClick={deleteFolderWithFiles}>DELETE FOLDER</button>
