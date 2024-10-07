@@ -52,14 +52,6 @@
   border-left: 2px solid var(--secondary-color);
 }
 
-.fileCardHeaders > button:first-child:hover {
-  background-color: green;
-}
-
-.fileCardHeaders > button:last-child:hover {
-  background-color: red;
-}
-
 .fileCardHeaders > button:hover {
   border-color: black;
 }

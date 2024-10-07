@@ -34,12 +34,7 @@
   border: 2px solid var(--secondary-color);
 }
 
-.file_buttons > button:first-of-type:hover {
-  background-color: green;
-  border-color: black;
-}
-.file_buttons > button:last-of-type:hover {
-  background-color: red;
+.file_buttons > button:hover {
   border-color: black;
 }
 
