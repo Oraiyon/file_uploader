@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import { useRef, useState } from "react";
 
 const Folders = (props) => {
-  const [displayFolderModal, setDisplayFolderModal] = useState(false);
+  const [folderModal, setFolderModal] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState("");
   const [folderToBeDeleted, setFolderToBeDeleted] = useState(null);
 
@@ -19,14 +19,14 @@ const Folders = (props) => {
       });
       const data = await response.json();
       if (data.filesLength) {
-        setDisplayFolderModal(true);
+        setFolderModal(true);
         setDeleteMessage(
           `${folder.name} has ${data.filesLength} ${data.filesLength === 1 ? "file" : "files"} inside. Are you sure you want to delete ${folder.name}?`
         );
         setFolderToBeDeleted(folder);
       } else {
         props.setFolderList(data);
-        setDisplayFolderModal(false);
+        setFolderModal(false);
       }
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ const Folders = (props) => {
   };
 
   const closeModal = () => {
-    setDisplayFolderModal(false);
+    setFolderModal(false);
     setDeleteMessage("");
   };
 
@@ -45,7 +45,7 @@ const Folders = (props) => {
       });
       const data = await response.json();
       props.setFolderList(data);
-      setDisplayFolderModal(false);
+      setFolderModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +55,57 @@ const Folders = (props) => {
     try {
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const DisplayFolderHeader = (props) => {
+    if (!deleteMessage) {
+      return (
+        <div className={styles.folderButtons}>
+          <button>
+            <Icon path={mdiShareVariant}></Icon>
+          </button>
+          <p>{props.folder.name}</p>
+          <button onClick={() => deleteFolder(props.folder)}>
+            <Icon path={mdiClose} title={"Delete"}></Icon>
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.folderButtons}>
+          <button>
+            <Icon path={mdiShareVariant}></Icon>
+          </button>
+          <p>{props.folder.name}</p>
+          <button>
+            <Icon path={mdiClose}></Icon>
+          </button>
+        </div>
+      );
+    }
+  };
+
+  const DisplayFolderFooter = (props) => {
+    return (
+      <div className={styles.folderCreator}>
+        <Icon path={mdiAccount}></Icon>
+        <p>{props.folder.User.username}</p>
+      </div>
+    );
+  };
+
+  const DisplayFolderModal = (props) => {
+    if (props.folderModal) {
+      return (
+        <div className={styles.folderModal} ref={folderModalRef}>
+          <button onClick={closeModal}>
+            <Icon path={mdiClose}></Icon>
+          </button>
+          <p>{deleteMessage}</p>
+          <button onClick={deleteFolderWithFiles}>DELETE FOLDER</button>
+        </div>
+      );
     }
   };
 
@@ -68,58 +119,25 @@ const Folders = (props) => {
           {props.folderList.map((folder) =>
             !deleteMessage ? (
               <div key={folder.id} className={styles.folderCard}>
-                <div className={styles.folderButtons}>
-                  <button>
-                    <Icon path={mdiShareVariant}></Icon>
-                  </button>
-                  <p>{folder.name}</p>
-                  <button onClick={() => deleteFolder(folder)}>
-                    <Icon path={mdiClose} title={"Delete"}></Icon>
-                  </button>
-                </div>
+                <DisplayFolderHeader folder={folder} />
                 <Link to={`/${props.user.id}/${folder.id}`}>
                   <div className={styles.folder} onClick={() => props.setSelectedFolder(folder)}>
                     <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
                   </div>
                 </Link>
-                <div className={styles.folderCreator}>
-                  <Icon path={mdiAccount}></Icon>
-                  <p>{folder.User.username}</p>
-                </div>
-                <p>{folder.userId.username}</p>
+                <DisplayFolderFooter folder={folder} />
               </div>
             ) : (
               <div key={folder.id} className={styles.invalidFolderCard}>
-                <div className={styles.folderButtons}>
-                  <button>
-                    <Icon path={mdiShareVariant}></Icon>
-                  </button>
-                  <p>{folder.name}</p>
-                  <button>
-                    <Icon path={mdiClose}></Icon>
-                  </button>
-                </div>
+                <DisplayFolderHeader folder={folder} />
                 <div className={styles.folder}>
                   <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
                 </div>
-                <div className={styles.folderCreator}>
-                  <Icon path={mdiAccount}></Icon>
-                  <p>{folder.User.username}</p>
-                </div>
+                <DisplayFolderFooter folder={folder} />
               </div>
             )
           )}
-          {displayFolderModal ? (
-            <div className={styles.folderModal} ref={folderModalRef}>
-              <button onClick={closeModal}>
-                <Icon path={mdiClose}></Icon>
-              </button>
-              <p>{deleteMessage}</p>
-              <button onClick={deleteFolderWithFiles}>DELETE FOLDER</button>
-            </div>
-          ) : (
-            ""
-          )}
+          <DisplayFolderModal folderModal={folderModal} />
         </div>
       </>
     );
