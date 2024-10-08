@@ -43,6 +43,9 @@ export const delete_folder = expressAsyncHandler(async (req, res, next) => {
     const folders = await prisma.folder.findMany({
       where: {
         userId: req.params.id
+      },
+      include: {
+        User: true
       }
     });
     res.status(200).json(folders);
@@ -71,6 +74,9 @@ export const delete_folder_files = expressAsyncHandler(async (req, res, next) =>
   const folders = await prisma.folder.findMany({
     where: {
       userId: req.params.id
+    },
+    include: {
+      User: true
     }
   });
   res.status(200).json(folders);
