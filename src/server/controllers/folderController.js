@@ -18,6 +18,9 @@ const get_folders = expressAsyncHandler(async (req, res, next) => {
   const folders = await prisma.folder.findMany({
     where: {
       userId: req.params.id
+    },
+    include: {
+      User: true
     }
   });
   res.status(200).json(folders);
