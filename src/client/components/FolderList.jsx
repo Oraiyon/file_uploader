@@ -26,8 +26,21 @@ const Folders = (props) => {
         setFolderToBeDeleted(folder);
       } else {
         props.setFolderList(data);
-        setFolderModal(false);
+        closeModal();
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteFolderWithFiles = async () => {
+    try {
+      const response = await fetch(`/api/${props.user.id}/delete/${folderToBeDeleted.id}/files`, {
+        method: "DELETE"
+      });
+      const data = await response.json();
+      props.setFolderList(data);
+      closeModal();
     } catch (error) {
       console.log(error);
     }
@@ -38,21 +51,9 @@ const Folders = (props) => {
     setDeleteMessage("");
   };
 
-  const deleteFolderWithFiles = async () => {
-    try {
-      const response = await fetch(`/api/${props.user.id}/delete/${folderToBeDeleted.id}/files`, {
-        method: "DELETE"
-      });
-      const data = await response.json();
-      props.setFolderList(data);
-      setFolderModal(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const shareFolder = async () => {
     try {
+      //
     } catch (error) {
       console.log(error);
     }
