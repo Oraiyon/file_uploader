@@ -32,7 +32,6 @@
 }
 
 .fileCardHeaders > button {
-  padding: 0.25em;
   border: none;
   border-bottom: 2px solid var(--secondary-color);
   cursor: pointer;
