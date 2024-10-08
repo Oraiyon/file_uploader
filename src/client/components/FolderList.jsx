@@ -1,6 +1,6 @@
 import styles from "../stylesheets/FolderList.module.css";
 import Icon from "@mdi/react";
-import { mdiFolder, mdiClose, mdiShareVariant } from "@mdi/js";
+import { mdiFolder, mdiClose, mdiShareVariant, mdiAccount } from "@mdi/js";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useRef, useState } from "react";
@@ -51,6 +51,13 @@ const Folders = (props) => {
     }
   };
 
+  const shareFolder = async () => {
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!props.folderList.length) {
     return <p>No folders.</p>;
   } else {
@@ -75,6 +82,11 @@ const Folders = (props) => {
                     <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
                   </div>
                 </Link>
+                <div className={styles.folderCreator}>
+                  <Icon path={mdiAccount}></Icon>
+                  <p>{folder.User.username}</p>
+                </div>
+                <p>{folder.userId.username}</p>
               </div>
             ) : (
               <div key={folder.id} className={styles.invalidFolderCard}>
@@ -89,6 +101,10 @@ const Folders = (props) => {
                 </div>
                 <div className={styles.folder}>
                   <Icon path={mdiFolder} className={styles.folderIcon}></Icon>
+                </div>
+                <div className={styles.folderCreator}>
+                  <Icon path={mdiAccount}></Icon>
+                  <p>{folder.User.username}</p>
                 </div>
               </div>
             )

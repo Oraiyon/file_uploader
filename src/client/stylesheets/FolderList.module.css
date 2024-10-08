@@ -6,7 +6,8 @@
   height: 100%;
 }
 
-.folderCard {
+.folderCard,
+.invalidFolderCard {
   border: 2px solid var(--secondary-color);
   border-radius: 0.25em;
   display: flex;
@@ -14,6 +15,10 @@
   height: fit-content;
   width: 100%;
   max-width: 150px;
+}
+
+.folderCard:hover {
+  border-color: black;
 }
 
 .folderButtons {
@@ -67,10 +72,6 @@
   color: rgb(235, 216, 192);
 }
 
-.folderCard:hover {
-  border-color: black;
-}
-
 .folderCard > a:hover .folderIcon {
   fill: none;
   stroke: black;
@@ -115,25 +116,20 @@
   width: 100%;
 }
 
-.invalidFolderCard {
-  border: 2px solid var(--secondary-color);
-  border-radius: 0.25em;
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-}
-
-.invalidFolderCard > button {
-  width: fit-content;
-  align-self: flex-end;
-  border: none;
-  padding: 0.25em;
-  border-left: 2px solid var(--secondary-color);
-  border-bottom: 2px solid var(--secondary-color);
-  display: flex;
-}
-
 .invalidFolderCard > .folderButtons > button {
   cursor: default;
   pointer-events: none;
+}
+
+.folderCreator {
+  display: flex;
+  align-items: center;
+}
+
+.folderCreator > svg {
+  max-width: 25px;
+}
+
+.folderCreator > p {
+  text-overflow: ellipsis;
 }
