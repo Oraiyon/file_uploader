@@ -19,8 +19,12 @@ const Header = (props) => {
           </div>
         ) : (
           <div className={styles.right_header_links}>
-            <Link to={"/signup"}>Sign Up</Link>
-            <Link to={"/login"}>Log In</Link>
+            <button>
+              <Link to={"/signup"}>Sign Up</Link>
+            </button>
+            <button>
+              <Link to={"/login"}>Log In</Link>
+            </button>
           </div>
         )}
       </nav>
