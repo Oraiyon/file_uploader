@@ -26,31 +26,59 @@ const post_upload_file = [
       folder: "file_uploader"
     });
     await unlink(req.file.path);
-    const file = await prisma.file.create({
-      data: {
-        name: req.body.name,
-        url: imageURL.secure_url,
-        Folder: {
-          connectOrCreate: {
-            where: {
-              name: req.body.folder
-            },
-            create: {
-              name: req.body.folder,
-              userId: req.params.id
-            }
-          }
-        },
-        User: {
-          connect: {
-            id: req.params.id
-          }
-        },
-        size: imageURL.bytes,
-        format: imageURL.format,
-        publicId: imageURL.public_id.slice(14)
+    const folder = await prisma.folder.findFirst({
+      where: {
+        name: req.body.folder,
+        userId: req.params.id
       }
     });
+    if (!folder) {
+      const newFolder = await prisma.folder.create({
+        data: {
+          name: req.body.folder,
+          userId: req.params.id
+        }
+      });
+      const newFile = await prisma.file.create({
+        data: {
+          name: req.body.name,
+          url: imageURL.secure_url,
+          Folder: {
+            connect: {
+              id: newFolder.id
+            }
+          },
+          User: {
+            connect: {
+              id: req.params.id
+            }
+          },
+          size: imageURL.bytes,
+          format: imageURL.format,
+          publicId: imageURL.public_id.slice(14)
+        }
+      });
+    } else {
+      const newFile = await prisma.file.create({
+        data: {
+          name: req.body.name,
+          url: imageURL.secure_url,
+          Folder: {
+            connect: {
+              id: folder.id
+            }
+          },
+          User: {
+            connect: {
+              id: req.params.id
+            }
+          },
+          size: imageURL.bytes,
+          format: imageURL.format,
+          publicId: imageURL.public_id.slice(14)
+        }
+      });
+    }
     const user = await prisma.user.findFirst({
       where: {
         id: req.params.id
