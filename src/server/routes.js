@@ -8,7 +8,7 @@ import post_upload_file, {
 import get_folders, {
   delete_folder,
   delete_folder_files,
-  share_folder
+  put_share_folder
 } from "./controllers/folderController.js";
 
 const router = express.Router();
@@ -29,5 +29,6 @@ router.delete("/api/:id/:folderId/delete/:fileId", delete_file);
 router.get("/api/:id/folders", get_folders);
 router.delete("/api/:id/delete/:folderId", delete_folder);
 router.delete("/api/:id/delete/:folderId/files", delete_folder_files);
+router.put("/api/:id/share/:folderId", put_share_folder);
 
 export default router;

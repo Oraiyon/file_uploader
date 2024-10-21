@@ -78,7 +78,8 @@
   stroke-width: 0.5px;
 }
 
-.folderModal {
+.deleteFolderModal,
+.shareFolderModal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -95,12 +96,14 @@
   background-color: white;
 }
 
-.folderModal > button {
+.deleteFolderModal > button,
+.shareFolderModal > button {
   cursor: pointer;
   border: 2px solid black;
 }
 
-.folderModal > button:first-of-type {
+.deleteFolderModal > button:first-of-type,
+.shareFolderModal > button:first-of-type {
   align-self: flex-end;
   display: flex;
   max-width: 25px;
@@ -108,12 +111,32 @@
   border-right: none;
 }
 
-.folderModal > button:last-of-type {
+.deleteFolderModal > button:last-of-type {
   padding: 0.25em;
 }
 
-.folderModal > button > svg {
+.deleteFolderModal > button > svg,
+.shareFolderModal > button > svg {
   width: 100%;
+}
+
+.shareFolderModal > div {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.shareFolderModal > div > button {
+  cursor: pointer;
+  padding: 0.25em;
+  border: 2px solid var(--secondary-color);
+}
+
+.shareFolderModal > div > button:hover {
+  border-color: black;
 }
 
 .invalidFolderCard > .folderButtons > button {
