@@ -82,4 +82,13 @@ export const delete_folder_files = expressAsyncHandler(async (req, res, next) =>
   res.status(200).json(folders);
 });
 
+export const share_folder = expressAsyncHandler(async (req, res, next) => {
+  const folder = await prisma.folder.findFirst({
+    where: {
+      id: req.params.folderId
+    }
+  });
+  res.status(200).json(folder);
+});
+
 export default get_folders;

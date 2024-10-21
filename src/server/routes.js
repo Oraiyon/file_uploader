@@ -5,7 +5,11 @@ import post_upload_file, {
   get_file,
   get_folder_files
 } from "./controllers/fileController.js";
-import get_folders, { delete_folder, delete_folder_files } from "./controllers/folderController.js";
+import get_folders, {
+  delete_folder,
+  delete_folder_files,
+  share_folder
+} from "./controllers/folderController.js";
 
 const router = express.Router();
 
