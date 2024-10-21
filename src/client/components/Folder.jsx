@@ -70,7 +70,7 @@ const Folder = () => {
                   <Icon path={mdiClose} title="Delete"></Icon>
                 </button>
               </div>
-              <Link to={`/${user.id}/${selectedFolder.id}/${file.id}`}>
+              <Link to={`/${user.id}/folder/${selectedFolder.id}/file/${file.id}`}>
                 <div className={styles.file} onClick={() => setSelectedFile(file)}>
                   <img src={file.url}></img>
                 </div>

@@ -34,11 +34,11 @@ const Router = () => {
           element: <UploadFileForm />
         },
         {
-          path: "/:id/:folderId",
+          path: "/:id/folder/:folderId",
           element: <Folder />
         },
         {
-          path: "/:id/:folderId/:fileId",
+          path: "/:id/folder/:folderId/file/:fileId",
           element: <File />
         }
       ]
