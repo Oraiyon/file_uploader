@@ -78,8 +78,7 @@
   stroke-width: 0.5px;
 }
 
-.deleteFolderModal,
-.shareFolderModal {
+.deleteFolderModal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -96,14 +95,12 @@
   background-color: white;
 }
 
-.deleteFolderModal > button,
-.shareFolderModal > button {
+.deleteFolderModal > button {
   cursor: pointer;
   border: 2px solid black;
 }
 
-.deleteFolderModal > button:first-of-type,
-.shareFolderModal > button:first-of-type {
+.deleteFolderModal > button:first-of-type {
   align-self: flex-end;
   display: flex;
   max-width: 25px;
@@ -115,50 +112,8 @@
   padding: 0.25em;
 }
 
-.deleteFolderModal > button > svg,
-.shareFolderModal > button > svg {
+.deleteFolderModal > button > svg {
   width: 100%;
-}
-
-.shareFolderModal > div {
-  flex-grow: 1;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25em;
-}
-
-.shareFolderModal > div > button {
-  cursor: pointer;
-  padding: 0.25em;
-  border: 2px solid var(--secondary-color);
-}
-
-.shareFolderModal > div > button:hover {
-  border-color: black;
-}
-
-.shareLink {
-  display: flex;
-  flex-direction: column;
-}
-
-.shareLink > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 0.25em;
-}
-
-.shareLink > div > button {
-  max-width: 25px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.25em;
 }
 
 .invalidFolderCard > .folderButtons > button {

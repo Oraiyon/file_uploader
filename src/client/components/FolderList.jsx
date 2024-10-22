@@ -1,9 +1,10 @@
 import styles from "../stylesheets/FolderList.module.css";
 import Icon from "@mdi/react";
-import { mdiFolder, mdiClose, mdiShareVariant, mdiAccount, mdiContentCopy } from "@mdi/js";
+import { mdiFolder, mdiClose, mdiShareVariant, mdiAccount } from "@mdi/js";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useRef, useState } from "react";
+import ShareFolderModal from "./ShareFolderModal";
 
 const Folders = (props) => {
   const [displayDeleteFolderModal, setDisplayDeleteFolderModal] = useState(false);
@@ -13,7 +14,6 @@ const Folders = (props) => {
   const [folderToBeShared, setFolderTobeShared] = useState(null);
 
   const deleteFolderModal = useRef(null);
-  const shareFolderModal = useRef(null);
 
   const DisplayFolderHeader = (props) => {
     if (!modalMessage) {
@@ -110,75 +110,11 @@ const Folders = (props) => {
     }
   };
 
-  const DisplayShareFolderModal = (props) => {
-    const [shareLink, setShareLink] = useState("");
-    const [shareDuration, setShareDuration] = useState(null);
-
-    const shareDurationRef = useRef(null);
-
-    const submitShareDuration = async () => {
-      try {
-        const response = await fetch(`/api/${props.user.id}/share/${props.folderToBeShared.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            length: shareDurationRef.current.value
-          })
-        });
-        const data = await response.json();
-        setShareLink(window.location.origin + "/folder/" + data.id + "/share");
-        setShareDuration(shareDurationRef.current.value);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    const copyLink = async () => {
-      try {
-        await navigator.clipboard.writeText(shareLink);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (props.displayShareFolderModal) {
-      return (
-        <div className={styles.shareFolderModal} ref={shareFolderModal}>
-          <button onClick={closeModal}>
-            <Icon path={mdiClose}></Icon>
-          </button>
-          {!shareDuration ? (
-            <div>
-              <label htmlFor="shareDuration">Share Duration: </label>
-              <select name="shareDuration" id="shareDuration" ref={shareDurationRef}>
-                <option value="1">1 Day</option>
-                <option value="5">5 Days</option>
-                <option value="7">7 Days</option>
-              </select>
-              <button onClick={submitShareDuration}>Send</button>
-            </div>
-          ) : (
-            <div className={styles.shareLink}>
-              <p>Share Link:</p>
-              <div>
-                <p>{shareLink}</p>
-                <button onClick={copyLink}>
-                  <Icon path={mdiContentCopy}></Icon>
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      );
-    }
-  };
-
-  const closeModal = () => {
+  const closeModal = (func) => {
     setDisplayDeleteFolderModal(false);
     setModalMessage("");
     setDisplayShareFolderModal(false);
+    func("");
   };
 
   if (!props.folderList.length) {
@@ -210,10 +146,11 @@ const Folders = (props) => {
             )
           )}
           <DisplayDeleteFolderModal displayDeleteFolderModal={displayDeleteFolderModal} />
-          <DisplayShareFolderModal
+          <ShareFolderModal
             user={props.user}
             displayShareFolderModal={displayShareFolderModal}
             folderToBeShared={folderToBeShared}
+            closeModal={closeModal}
           />
         </div>
       </>
