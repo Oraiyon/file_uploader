@@ -139,6 +139,28 @@
   border-color: black;
 }
 
+.shareLink {
+  display: flex;
+  flex-direction: column;
+}
+
+.shareLink > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0.25em;
+}
+
+.shareLink > div > button {
+  max-width: 25px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25em;
+}
+
 .invalidFolderCard > .folderButtons > button {
   cursor: default;
   pointer-events: none;

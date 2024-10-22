@@ -1,9 +1,9 @@
 import styles from "../stylesheets/FolderList.module.css";
 import Icon from "@mdi/react";
-import { mdiFolder, mdiClose, mdiShareVariant, mdiAccount } from "@mdi/js";
+import { mdiFolder, mdiClose, mdiShareVariant, mdiAccount, mdiContentCopy } from "@mdi/js";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const Folders = (props) => {
   const [displayDeleteFolderModal, setDisplayDeleteFolderModal] = useState(false);
@@ -160,9 +160,14 @@ const Folders = (props) => {
               <button onClick={submitShareDuration}>Send</button>
             </div>
           ) : (
-            <div>
-              <p>Share Link: {shareLink}</p>
-              <button onClick={copyLink}>Copy Link</button>
+            <div className={styles.shareLink}>
+              <p>Share Link:</p>
+              <div>
+                <p>{shareLink}</p>
+                <button onClick={copyLink}>
+                  <Icon path={mdiContentCopy}></Icon>
+                </button>
+              </div>
             </div>
           )}
         </div>
