@@ -135,6 +135,14 @@ const Folders = (props) => {
       }
     };
 
+    const copyLink = async () => {
+      try {
+        await navigator.clipboard.writeText(shareLink);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (props.displayShareFolderModal) {
       return (
         <div className={styles.shareFolderModal} ref={shareFolderModal}>
@@ -154,6 +162,7 @@ const Folders = (props) => {
           ) : (
             <div>
               <p>Share Link: {shareLink}</p>
+              <button onClick={copyLink}>Copy Link</button>
             </div>
           )}
         </div>
