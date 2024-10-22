@@ -22,7 +22,6 @@ const ShareFolderModal = (props) => {
         })
       });
       const data = await response.json();
-      console.log(data);
       setShareLink(window.location.origin + "/folder/" + data.id + "/share");
       setShareDuration(shareDurationRef.current.value);
     } catch (error) {
@@ -59,24 +58,15 @@ const ShareFolderModal = (props) => {
             )}
             <div>
               {props.folderToBeShared.share_Date ? (
-                <div>
-                  <label htmlFor="shareDuration">New Share Length:</label>
-                  <select name="shareDuration" id="shareDuration" ref={shareDurationRef}>
-                    <option value="1">1 Day</option>
-                    <option value="5">5 Days</option>
-                    <option value="7">7 Days</option>
-                  </select>
-                </div>
+                <label htmlFor="shareDuration">New Share Length:</label>
               ) : (
-                <div>
-                  <label htmlFor="shareDuration">Share Length:</label>
-                  <select name="shareDuration" id="shareDuration" ref={shareDurationRef}>
-                    <option value="1">1 Day</option>
-                    <option value="5">5 Days</option>
-                    <option value="7">7 Days</option>
-                  </select>
-                </div>
+                <label htmlFor="shareDuration">Share Length:</label>
               )}
+              <select name="shareDuration" id="shareDuration" ref={shareDurationRef}>
+                <option value="1">1 Day</option>
+                <option value="5">5 Days</option>
+                <option value="7">7 Days</option>
+              </select>
             </div>
             <button onClick={submitShareDuration}>Send</button>
           </div>
