@@ -95,4 +95,21 @@ export const put_share_folder = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(folder);
 });
 
+export const get_shared_folder = expressAsyncHandler(async (req, res, next) => {
+  const folder = await prisma.folder.findFirst({
+    where: {
+      id: req.params.folderId
+    },
+    include: {
+      User: true
+    }
+  });
+  const date = new Date(folder.share_Date);
+  if (Date.now() < date.getTime()) {
+    res.status(200).json(folder);
+  } else {
+    res.status(200).json(null);
+  }
+});
+
 export default get_folders;
